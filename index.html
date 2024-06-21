@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kunal Sonne's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tailwind CSS -->
@@ -27,12 +30,27 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
-            animation: zoomIn 2s ease-in-out;
+            animation: zoomIn 4s ease-in-out;
             position: relative;
         }
         .animated {
             animation: fadeIn 2s ease-in-out;
         }
+        .animated-slide-in {
+    animation: slideIn 1s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
         .gradient-bg {
             background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
         }
@@ -94,6 +112,123 @@
             background-color: #1a2a6c;
             color: white;
         }
+        .filter-effect {
+            filter: grayscale(50%);
+            transition: filter 0.5s ease;
+        }
+
+        .filter-effect:hover {
+            filter: grayscale(0%);
+        }
+
+        .projects-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .projects-card .card-body {
+            padding: 20px;
+        }
+
+        .projects-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .py-5 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-5 {
+            margin-bottom: 3rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col-md-6 {
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .no-gutters {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .no-gutters > .col,
+        .no-gutters > [class*=col-] {
+            padding-right: 0;
+            padding-left: 0;
+        }
+        
+
+        #projects {
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Example gradient background */
+            color: #fff; /* Text color to ensure readability */
+        }
+         #education{
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Example gradient background */
+            color: #fff; /* Text color to ensure readability */
+        }
+
+
+        #projects .card {
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background for cards */
+            color: #333; /* Dark text for cards */
+        }
+         #education .card {
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background for cards */
+            color: #333; /* Dark text for cards */
+        }
+
+        .github-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.github-btn i {
+    margin-right: 8px;
+}
+
+.github-btn:hover {
+    background-color: #555;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+}
+
     </style>
 </head>
 <body>
@@ -138,7 +273,13 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">Kunal Sonne</h5>
-                                <p class="card-text">I am Kunal Sonne, a second-year student pursuing B.Tech in Pune. I have a keen interest in JavaScript, Python, and Machine Learning.</p>
+                                <p class="card-text">I am Kunal Sonne, a second-year student pursuing B.Tech in Pune. I have a keen interest in JavaScript, Python, and Machine Learning.Below are my social media connections</p><br>
+                                <p class="card-text">
+    <a href="https://github.com/erenyeager101" class="github-btn" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+    </a>
+</p>
+<!--                                 <p class="card-text"><button href="https://github.com/erenyeager101">Github</button> -->
                             </div>
                         </div>
                     </div>
@@ -194,11 +335,11 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="container py-5 animate__animated animate__fadeIn">
+    <section id="projects" class="container py-5 animated-slide-in">
         <h2 class="text-center mb-5">Projects</h2>
         <div class="row">
             <div class="col-md-6 mb-4">
-                <div class="card projects-card animate__animated animate__zoomIn">
+                <div class="card projects-card animated-slide-in">
                     <div class="row no-gutters">
                         <div class="col-md-4">
                             <img src="https://source.unsplash.com/random/3" alt="Project 1" class="img-fluid filter-effect">
@@ -206,14 +347,14 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">Project 1</h5>
-                                <p class="card-text">WellnessLinkHub-hospital portal.</p>
+                                <p class="card-text">WellnessLinkHub-Ultimate hospital portal.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mb-4">
-                <div class="card projects-card animate__animated animate__zoomIn">
+                <div class="card projects-card animated-slide-in">
                     <div class="row no-gutters">
                         <div class="col-md-4">
                             <img src="https://source.unsplash.com/random/4" alt="Project 2" class="img-fluid filter-effect">
@@ -229,6 +370,9 @@
             </div>
         </div>
     </section>
+   
+
+
 
     <!-- Contact Section -->
     <section id="contact" class="gradient-bg py-5 text-white text-center">
