@@ -251,7 +251,8 @@
 <body>
 
     <!-- Hero Section -->
-    <section class="hero animate__animated animate__zoomIn">
+   <section class="hero animate__animated animate__zoomIn">
+        <div class="slideshow left-slideshow"></div> <!-- Container for left slideshow -->
         <div class="text-center">
             <h1 class="display-4 animate__animated animate__fadeInDown">Kunal Sonne</h1>
             <p class="lead animate__animated animate__fadeInUp">Pursuing B.Tech in Pune | SY Student</p>
@@ -261,6 +262,8 @@
                 <a href="mailto:kunalsonne@example.com" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
+       <div class="slideshow right-slideshow"></div> <!-- Container for right slideshow -->
+        <div class="hero-cards">
         <div class="hero-cards">
             <a href="#about" class="hero-card">
                 <h5>About Myself</h5>
@@ -275,6 +278,43 @@
                 <h5>Skills</h5>
             </a>
         </div>
+            <script>
+        // Images for left and right slideshows
+        const leftImages = [
+            'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/943096/pexels-photo-943096.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/3888151/pexels-photo-3888151.jpeg?auto=compress&cs=tinysrgb&w=600'
+        ];
+        const rightImages = [
+            'https://images.pexels.com/photos/270557/pexels-photo-270557.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/5926388/pexels-photo-5926388.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/5935788/pexels-photo-5935788.jpeg?auto=compress&cs=tinysrgb&w=600'
+        ];
+
+        let leftIndex = 0;
+        let rightIndex = 0;
+        const leftSlideshow = document.querySelector('.left-slideshow');
+        const rightSlideshow = document.querySelector('.right-slideshow');
+
+        function updateLeftSlideshow() {
+            leftSlideshow.style.backgroundImage = `url('${leftImages[leftIndex]}')`;
+            leftIndex = (leftIndex + 1) % leftImages.length;
+        }
+
+        function updateRightSlideshow() {
+            rightSlideshow.style.backgroundImage = `url('${rightImages[rightIndex]}')`;
+            rightIndex = (rightIndex + 1) % rightImages.length;
+        }
+
+        // Initial update
+        updateLeftSlideshow();
+        updateRightSlideshow();
+
+        // Update slideshows every 3 seconds
+        setInterval(updateLeftSlideshow, 3000);
+        setInterval(updateRightSlideshow, 3000);
+    </script>
+
     </section>
 
     <!-- About Section -->
