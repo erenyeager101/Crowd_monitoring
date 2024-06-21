@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunal Sonne's Portfolio</title>
+    <title>Kunal Sonne</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
         }
         .hero {
             background: url('https://source.unsplash.com/random') no-repeat center center/cover;
@@ -22,32 +27,65 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+            animation: zoomIn 2s ease-in-out;
         }
         .animated {
             animation: fadeIn 2s ease-in-out;
         }
-        @keyframes fadeIn {
+        .gradient-bg {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        .filter-effect {
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        .filter-effect:hover {
+            filter: none;
+        }
+        @keyframes zoomIn {
             from {
+                transform: scale(0.5);
                 opacity: 0;
             }
             to {
+                transform: scale(1);
                 opacity: 1;
             }
+        }
+        .card {
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #fdbb2d;
         }
     </style>
 </head>
 <body>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero animate__animated animate__zoomIn">
         <div class="text-center">
-            <h1 class="display-4">Kunal Sonne</h1>
-            <p class="lead">Pursuing B.Tech in Pune | SY Student</p>
+            <h1 class="display-4 animate__animated animate__fadeInDown">Kunal Sonne</h1>
+            <p class="lead animate__animated animate__fadeInUp">Pursuing B.Tech in VIT Pune | SY Student</p>
+            <div class="social-icons mt-4">
+                <a href="https://github.com/erenyeager101" target="_blank" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/kunalsonne" target="_blank" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:kunalsonne@example.com" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="container py-5 animated">
+    <section id="about" class="container py-5 animated animate__animated animate__fadeIn">
         <div class="row">
             <div class="col-md-6">
                 <h2>About Me</h2>
@@ -64,41 +102,44 @@
         <div class="container">
             <h2 class="text-center">Skills</h2>
             <div class="row">
-                <div class="col-md-4">
-                    <h3>JavaScript</h3>
+                <div class="col-md-4 text-center animate__animated animate__fadeInLeft">
+                    <i class="fab fa-js-square fa-3x"></i>
+                    <h3 class="mt-3">JavaScript</h3>
                     <p>Experienced in building web applications using JavaScript.</p>
                 </div>
-                <div class="col-md-4">
-                    <h3>Python</h3>
-                    <p>Proficient in Python for data analysis and machine learning projects.</p>
+                <div class="col-md-4 text-center animate__animated animate__fadeInUp">
+                    <i class="fab fa-python fa-3x"></i>
+                    <h3 class="mt-3">Python</h3>
+                    <p>Beginner in Python for and machine learning , basic knowledge about creating python projects.</p>
                 </div>
-                <div class="col-md-4">
-                    <h3>Machine Learning</h3>
-                    <p>Developed various machine learning models and projects.</p>
+                <div class="col-md-4 text-center animate__animated animate__fadeInRight">
+                    <i class="fas fa-brain fa-3x"></i>
+                    <h3 class="mt-3">Machine Learning</h3>
+                    <p>Developed a machine learning based detection model.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="container py-5 animated">
+    <section id="projects" class="container py-5 animated animate__animated animate__fadeIn">
         <h2 class="text-center">Projects</h2>
         <div class="row">
             <div class="col-md-6 mb-4">
-                <div class="card">
+                <div class="card animate__animated animate__zoomIn">
                     <img src="https://github.com/erenyeager101/vite/blob/main/src/components/Screenshot%202024-06-21%20125308.png" class="card-img-top" alt="Project 1">
                     <div class="card-body">
                         <h5 class="card-title">Project 1</h5>
-                        <p class="card-text">Description of project 1.</p>
+                        <p class="card-text">WellnessLinkHub-hospital portal.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mb-4">
-                <div class="card">
+                <div class="card animate__animated animate__zoomIn">
                     <img src="https://github.com/erenyeager101/vite/blob/main/src/components/Screenshot%202024-06-21%20130803.png" class="card-img-top" alt="Project 2">
                     <div class="card-body">
                         <h5 class="card-title">Project 2</h5>
-                        <p class="card-text">Description of project 2.</p>
+                        <p class="card-text">ML based Heart Disease detection.</p>
                     </div>
                 </div>
             </div>
@@ -109,7 +150,7 @@
     <section id="contact" class="gradient-bg py-5 text-white text-center">
         <div class="container">
             <h2>Contact Me</h2>
-            <p>You can reach me via email at <a href="mailto:kunalsonne@example.com" class="text-white">kunalsonne@example.com</a></p>
+            <p>You can reach me via email at <a href="mailto:sonnekunal2@gmail.com" class="text-white">sonnekunal2@gmail.com</a></p>
             <p>Check out my <a href="https://github.com/erenyeager101" class="text-white">GitHub</a> for more projects.</p>
         </div>
     </section>
