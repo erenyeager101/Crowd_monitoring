@@ -28,6 +28,7 @@
             justify-content: center;
             background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
             animation: zoomIn 2s ease-in-out;
+            position: relative;
         }
         .animated {
             animation: fadeIn 2s ease-in-out;
@@ -67,6 +68,31 @@
         .social-icons a:hover {
             color: #fdbb2d;
         }
+        .hero-cards {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .hero-card {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .hero-card:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .projects-card {
+            background-color: #f5f5f5;
+        }
+        footer {
+            background-color: #1a2a6c;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -80,6 +106,20 @@
                 <a href="https://github.com/erenyeager101" target="_blank" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/kunalsonne" target="_blank" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:kunalsonne@example.com" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="hero-cards">
+            <div class="hero-card">
+                <h5>About Myself</h5>
+            </div>
+            <div class="hero-card">
+                <h5>Education</h5>
+            </div>
+            <div class="hero-card">
+                <h5>Projects</h5>
+            </div>
+            <div class="hero-card">
+                <h5>Skills</h5>
             </div>
         </div>
     </section>
@@ -135,20 +175,32 @@
         <h2 class="text-center mb-5">Projects</h2>
         <div class="row">
             <div class="col-md-6 mb-4">
-                <div class="card animate__animated animate__zoomIn">
-                    <img src="https://github.com/erenyeager101/vite/blob/main/src/components/Screenshot%202024-06-21%20125308.png?raw=true" class="card-img-top" alt="Project 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Project 1</h5>
-                        <p class="card-text">WellnessLinkHub - hospital portal.</p>
+                <div class="card projects-card animate__animated animate__zoomIn">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://github.com/erenyeager101/vite/blob/main/src/components/Screenshot%202024-06-21%20125308.png?raw=true" alt="Project 1" class="img-fluid filter-effect">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Project 1</h5>
+                                <p class="card-text">WellnessLinkHub - hospital portal.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mb-4">
-                <div class="card animate__animated animate__zoomIn">
-                    <img src="https://github.com/erenyeager101/vite/blob/main/src/components/Screenshot%202024-06-21%20130803.png?raw=true" class="card-img-top" alt="Project 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Project 2</h5>
-                        <p class="card-text">ML based Heart Disease detection.</p>
+                <div class="card projects-card animate__animated animate__zoomIn">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://github.com/erenyeager101/vite/blob/main/src/components/Screenshot%202024-06-21%20130803.png?raw=true" alt="Project 2" class="img-fluid filter-effect">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Project 2</h5>
+                                <p class="card-text">ML based Heart Disease detection.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
