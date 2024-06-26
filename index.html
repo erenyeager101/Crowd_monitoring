@@ -4,450 +4,708 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kunal Sonne's Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            
-    margin: 0;
-    padding: 0;
-                width: 100%;
-
-            overflow-x: hidden;
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Montserrat", sans-serif;
         }
-        .hero {
-            background: url('https://source.unsplash.com/random') no-repeat center center/cover;
-            height: 100vh;
+        .w3-row-padding img {
+            margin-bottom: 12px;
+        }
+        .w3-sidebar {
+            width: 120px;
+            background: #333;
+            padding-top: 20px;
+        }
+        #main {
+            margin-left: 120px;
+        }
+        @media only screen and (max-width: 600px) {
+            #main {
+                margin-left: 0;
+            }
+        }
+        .w3-sidebar a {
+            padding: 16px;
+            text-decoration: none;
+            font-size: 11px;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
-            animation: zoomIn 4s ease-in-out;
+            display: block;
+        }
+        .w3-sidebar a:hover {
+            background-color: #575757;
+        }
+        .background-video-container {
             position: relative;
-        }
-        .animated {
-            animation: fadeIn 2s ease-in-out;
-        }
-        .animated-slide-in {
-    animation: slideIn 1s ease-in-out forwards;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-        .gradient-bg {
-            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
-        }
-        .filter-effect {
-            filter: grayscale(100%);
-            transition: filter 0.3s;
-        }
-        .filter-effect:hover {
-            filter: none;
-        }
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        .card {
-            transition: transform 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        .social-icons a {
-            color: white;
-            margin: 0 10px;
-            font-size: 24px;
-            transition: color 0.3s;
-        }
-        .social-icons a:hover {
-            color: #fdbb2d;
-        }
-        .hero-cards {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        .hero-card {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            transition: background 0.3s;
-            cursor: pointer;
-        }
-        .hero-card:hover {
-            background: rgba(0, 0, 0, 0.9);
-        }
-        .projects-card {
-            background-color: #f5f5f5;
-        }
-        footer {
-            background-color: #1a2a6c;
-            color: white;
-        }
-        .filter-effect {
-            filter: grayscale(50%);
-            transition: filter 0.5s ease;
-        }
-
-        .filter-effect:hover {
-            filter: grayscale(0%);
-        }
-
-        .projects-card {
-            border: 1px solid #ddd;
-            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .projects-card .card-body {
-            padding: 20px;
-        }
-
-        .projects-card img {
             width: 100%;
+            height: 300px;
+        }
+        .background-video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 50%;
+            min-height: 100%;
+            width: auto;
             height: auto;
+            z-index: 0;
+            transform: translate(-50%, -50%);
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .py-5 {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-        }
-
-        .text-center {
+        .background-video-container .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
             text-align: center;
         }
-
-        .mb-5 {
-            margin-bottom: 3rem;
+        .background-video-container .content h1 {
+            color: white;
+            font-size: 4em;
+        }
+        .projects-section {
+            position: relative;
+            padding: 64px 0;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+        .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin: 16px;
+            background-color: #444;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .mb-4 {
-            margin-bottom: 1.5rem;
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .row {
+        .projects-grid {
             display: flex;
             flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
+            justify-content: center;
         }
 
-        .col-md-6 {
-            position: relative;
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-            flex: 0 0 50%;
-            max-width: 50%;
+        .project-card {
+            flex: 0 0 calc(33.33% - 20px);
+            margin: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
-        .no-gutters {
-            margin-right: 0;
-            margin-left: 0;
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
-
-        .no-gutters > .col,
-        .no-gutters > [class*=col-] {
-            padding-right: 0;
-            padding-left: 0;
+        .project-card .container {
+            padding: 16px;
         }
-        
-
-        
-
-         #projects, #education {
-             background-color: #bcc2c8 ;
-            width: 100%;
-            padding: 20px; /* Adjust padding as needed */
-            box-sizing: border-box;
+        .project-card .container h3 {
+            margin: 0;
         }
-
-        #about {
-            background-color: #bcc2c8 ; /* Add background color */
-            color: white;
-            padding: 20px; /* Adjust padding as needed */
-            box-sizing: border-box;
+        .project-card .container p {
+            margin: 8px 0 0;
         }
-
-        #projects .card {
-           background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,215,0,1) 100%);
-    color: #fff;
-    width: 100%;
-    padding: 20px; /* Adjust padding as needed */
-    box-sizing: border-box;
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
-         #education .card {
-            background: linear-gradient(90deg, rgba(0,123,255,1) 0%, rgba(155,89,182,1) 100%);
-    color: #fff;
-    width: 100%;
-    padding: 20px; /* Adjust padding as needed */
-    box-sizing: border-box; 
-        }
+        .skill-heading {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
 
-        .github-btn {
+.skill-heading h2 {
+    font-size: 3em;
     display: inline-block;
     padding: 10px 20px;
-    color: #fff;
+    background-color: #444;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    transform-origin: top;
+}
+
+.skill-heading h2 span {
+    position: relative;
+    z-index: 2;
+}
+
+.skill-heading .emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    font-size: 0.6em;
+    color: #555;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+.skill-heading.stretch h2 {
+    transform: scaleY(1.5);
     background-color: #333;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.github-btn i {
-    margin-right: 8px;
+/* Additional styling as per your design */
+
+.w3-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.github-btn:hover {
-    background-color: #555;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    text-decoration: none;
+.w3-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
+
+
+        /* Navbar animation */
+        .w3-sidebar a {
+            transition: background-color 0.3s ease-in-out;
+        }
+        .w3-sidebar a:hover {
+            background-color: #575757;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .mySlides {
+            display: none;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .video-section {
+    position: relative;
+    height: 500px; /* Adjust height as needed */
+    overflow: hidden;
+    margin-bottom: 64px; /* Space between video and projects section */
+}
+
+.video-section video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.projects-section {
+    position: relative;
+    z-index: 1;
+    padding: 64px 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: #fff;
+    text-align: center;
+}
+
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @-webkit-keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+        .heading-text {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #444;
+        border-radius: 10px;
+        text-transform: uppercase;
+        color: #fff;
+        transform: translateZ(0);
+        transition: transform 0.3s ease-out;
+    }
+
+    .heading-shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        color: rgba(0, 0, 0, 0.2);
+        transform: translate(3px, 3px) scale(1.05);
+    }
+
+    .heading-text:hover {
+        transform: translateY(-3px);
+    }
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .video-section {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 300px;
+        }
+        .video-section video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+        }
+        .video-section .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            text-align: center;
+        }
+        .video-section .content h2 {
+            color: white;
+            font-size: 2em;
+        }
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .skill-heading {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.skill-heading h2 {
+    font-size: 3em;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #444;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.skill-heading h2 span {
+    position: relative;
+    z-index: 2;
+}
+
+.skill-heading .emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    font-size: 0.6em;
+    color: #555;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+.skill-heading.stretch h2 {
+    width: 100%;
+    padding: 50px 0;
+    font-size: 4em;
+}
+.heading-text {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #0b0a0a;
+        border-radius: 10px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-transform: uppercase;
+        color: #faf4f4; 
+        /* text ka color */
+    }
+
+    .heading-shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        color: rgba(245, 241, 241, 0.2);
+        transform: translate(3px, 3px) scale(1.05);
+    }
+
+    /* Animation for heading movement */
+    @keyframes headingMovement {
+        0% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(12px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    .heading-text {
+        animation: headingMovement 2s ease-in-out infinite;
+    }
+    .cta-button {
+        position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+/* Additional styling as per your design */
 
     </style>
 </head>
-<body>
+<body class="w3-black">
 
-    <!-- Hero Section -->
-   <section class="hero animate__animated animate__zoomIn">
-        <div class="slideshow left-slideshow"></div> <!-- Container for left slideshow -->
-        <div class="text-center">
-            <h1 class="display-4 animate__animated animate__fadeInDown">Kunal Sonne</h1>
-            <p class="lead animate__animated animate__fadeInUp">Pursuing B.Tech in Pune | SY Student</p>
-            <div class="social-icons mt-4">
-                <a href="https://github.com/erenyeager101" target="_blank" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/kunalsonne" target="_blank" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:kunalsonne@example.com" class="animate__animated animate__fadeInUp animate__delay-1s"><i class="fas fa-envelope"></i></a>
-            </div>
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-center">
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+        <i class="fa fa-home w3-xxlarge"></i>
+        <p>HOME</p>
+    </a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+        <i class="fa fa-user w3-xxlarge"></i>
+        <p>ABOUT</p>
+    </a>
+    <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+        <i class="fa fa-eye w3-xxlarge"></i>
+        <p>PROJECTS</p>
+    </a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+        <i class="fa fa-envelope w3-xxlarge"></i>
+        <p>CONTACT</p>
+    </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+    <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+        <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+        <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+        <a href="#projects" class="w3-bar-item w3-button" style="width:25% !important">PROJECTS</a>
+        <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+    </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+    <!-- Header/Home -->
+    <header class="background-video-container">
+        <video autoplay muted loop>
+            <source src="C:\Users\KUNAL\Downloads\back.mp4.mp4" type="video/mp4">
+        </video>
+        <div class="content">
+            <h1>Kunal Sonne</h1>
         </div>
-       <div class="slideshow right-slideshow"></div> <!-- Container for right slideshow -->
-        <div class="hero-cards">
-        <div class="hero-cards">
-            <a href="#about" class="hero-card">
-                <h5>About Myself</h5>
-            </a>
-            <a href="#education" class="hero-card">
-                <h5>Education</h5>
-            </a>
-            <a href="#projects" class="hero-card">
-                <h5>Projects</h5>
-            </a>
-            <a href="#skills" class="hero-card">
-                <h5>Skills</h5>
-            </a>
-        </div>
-            <script>
-        // Images for left and right slideshows
-        const leftImages = [
-            'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/943096/pexels-photo-943096.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/3888151/pexels-photo-3888151.jpeg?auto=compress&cs=tinysrgb&w=600'
-        ];
-        const rightImages = [
-            'https://images.pexels.com/photos/270557/pexels-photo-270557.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/5926388/pexels-photo-5926388.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/5935788/pexels-photo-5935788.jpeg?auto=compress&cs=tinysrgb&w=600'
-        ];
-
-        let leftIndex = 0;
-        let rightIndex = 0;
-        const leftSlideshow = document.querySelector('.left-slideshow');
-        const rightSlideshow = document.querySelector('.right-slideshow');
-
-        function updateLeftSlideshow() {
-            leftSlideshow.style.backgroundImage = `url('${leftImages[leftIndex]}')`;
-            leftIndex = (leftIndex + 1) % leftImages.length;
-        }
-
-        function updateRightSlideshow() {
-            rightSlideshow.style.backgroundImage = `url('${rightImages[rightIndex]}')`;
-            rightIndex = (rightIndex + 1) % rightImages.length;
-        }
-
-        // Initial update
-        updateLeftSlideshow();
-        updateRightSlideshow();
-
-        // Update slideshows every 3 seconds
-        setInterval(updateLeftSlideshow, 3000);
-        setInterval(updateRightSlideshow, 3000);
-    </script>
-
-    </section>
+    </header>
 
     <!-- About Section -->
-    <section id="about" class=" container py-5 animate__animated animate__fadeIn" >
-        <h2 class="text-center mb-5">About Me</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://source.unsplash.com/random/1" alt="About Me" class="img-fluid filter-effect">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Kunal Sonne</h5>
-                                <p class="card-text">I am Kunal Sonne, a second-year student pursuing B.Tech in Pune. I have a keen interest in JavaScript, Python, and Machine Learning.Below are my social media connections</p><br>
-                                <p class="card-text">
-    <a href="https://github.com/erenyeager101" class="github-btn" target="_blank">
-        <i class="fab fa-github"></i> GitHub
-    </a>
-</p>
-<!--                                 <p class="card-text"><button href="https://github.com/erenyeager101">Github</button> -->
-                            </div>
-                        </div>
+    <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+        <h2 class="w3-text-light-grey">About Me</h2>
+        <hr style="width:200px" class="w3-opacity">
+        <p>Hi, I'm Kunal Sonne, a passionate coder with a keen interest in web development. I'm constantly exploring new technologies to enhance my skills. Beyond coding, I'm a movie buff and anime enthusiast. There's something magical about the storytelling in movies and anime that captivates my imagination. When I'm not coding or immersed in a film, you can find me learning and expanding my horizons. Join me on this journey as I continue to grow, innovate, and make my mark in the world of technology and creativity.</p>
+        <div style="text-align: center;">
+            <h2 class="w3-text-light-grey" style="font-size: 3em; position: relative; display: inline-block; padding: 10px 20px; background-color: #444; border-radius: 10px; text-transform: uppercase; animation: headingMovement 5s ease-in-out infinite;">
+                <span class="heading-text"> Skills</span>
+                <span class="heading-shadow">Web dev  </span>
+            </h2>
+            <h1>"College student passionate about machine learning and data analysis, focused on leveraging AI to solve real-world challenges."</h1>
+        </div>
+        </div>
+        
+        <div class="w3-row-padding w3-margin-top">
+            <!-- Web Dev Card -->
+            <div class="w3-third">
+                <div class="w3-card w3-padding w3-margin-bottom">
+                    <h3 class="w3-text-light-grey">Web Development</h3>
+                    <p class="w3-wide">HTML</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+                    </div>
+                    <p class="w3-wide">CSS</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:65%"></div>
+                    </div>
+                    <p class="w3-wide">JavaScript</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:50%"></div>
+                    </div>
+                    <p class="w3-wide">React</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:45%"></div>
+                    </div>
+                    <p class="w3-wide">Node.js</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:30%"></div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Languages Card -->
+            <div class="w3-third">
+                <div class="w3-card w3-padding w3-margin-bottom">
+                    <h3 class="w3-text-light-grey">Languages</h3>
+                    <p class="w3-wide">Python</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:55%"></div>
+                    </div>
+                    <p class="w3-wide">C</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+                    </div>
+                    <p class="w3-wide">Java</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:20%"></div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Softskills Card -->
+            <div class="w3-third">
+                <div class="w3-card w3-padding w3-margin-bottom">
+                    <h3 class="w3-text-light-grey">Softskills</h3>
+                    <p>Teamwork</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:90%"></div>
+                    </div>
+                    <p>Communication</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:55%"></div>
+                    </div>
+                    <p>Problem Solving</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+                    </div>
+                    <p>Time Management</p>
+                    <div class="w3-white">
+                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:45%"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+       
+    <a href="https://example.com" target="_blank" class="cta-button">Download Resume</a>
 
-    <!-- Education Section -->
-    <section id="education" class="container py-5 animate__animated animate__fadeIn">
-        <h2 class="text-center mb-5">Education</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://source.unsplash.com/random/2" alt="Education" class="img-fluid filter-effect">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">B.Tech in Pune</h5>
-                                <p class="card-text">Currently pursuing Bachelor of Technology in Pune. Specializing in software development and machine learning.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="gradient-bg py-5 text-white">
-        <div class="container">
-            <h2 class="text-center mb-5">Skills</h2>
-            <div class="row text-center">
-                <div class="col-md-4 animate__animated animate__fadeInLeft">
-                    <i class="fab fa-js-square fa-3x"></i>
-                    <h3 class="mt-3">JavaScript</h3>
-                    <p>Experienced in building web applications using JavaScript.</p>
-                </div>
-                <div class="col-md-4 animate__animated animate__fadeInUp">
-                    <i class="fab fa-python fa-3x"></i>
-                    <h3 class="mt-3">Python</h3>
-                    <p>Proficient in Python for data analysis and machine learning projects.</p>
-                </div>
-                <div class="col-md-4 animate__animated animate__fadeInRight">
-                    <i class="fas fa-brain fa-3x"></i>
-                    <h3 class="mt-3">Machine Learning</h3>
-                    <p>Developed various machine learning models and projects.</p>
-                </div>
-            </div>
+    <!-- Second Video Section -->
+    <div class="video-section">
+        <video autoplay muted loop>
+            <source src="C:\Users\KUNAL\Downloads\2025634-hd_1280_720_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="content">
+            <h2>Projects</h2>
         </div>
-    </section>
+    </div>
+
+    <!-- <div class="video-section" id="second-video">
+        <video id="second-fixed-video" src="C:\Users\KUNAL\Downloads\3051493-uhd_3840_2160_25fps.mp4" type="video/mp4"></video>
+        <div class="content">
+            <h2>Projects</h2>
+        </div>
+    </div> -->
 
     <!-- Projects Section -->
-    <section id="projects" class="container py-5 animated-slide-in">
-        <h2 class="text-center mb-5">Projects</h2>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card projects-card animated-slide-in">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://source.unsplash.com/random/3" alt="Project 1" class="img-fluid filter-effect">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Project 1</h5>
-                                <p class="card-text">WellnessLinkHub-Ultimate hospital portal.</p>
-                            </div>
-                        </div>
-                    </div>
+    <div class="projects-section w3-padding-64" id="projects">
+        <h2 class="w3-text-light-grey">Github Projects</h2>
+        <hr style="width:200px" class="w3-opacity">
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="C:\Users\KUNAL\OneDrive\Pictures\Screenshots\Q6_Image1_EDAI2.png" alt="Project 1">
+                <div class="container">
+                    <h3>ML based Heart Disease detection</h3>
+                    <p>eart disease detection using machine learning involves developing models to predict the presence or risk of heart disease based on various clinical and demographic data. The goal is to improve early diagnosis and facilitate timely treatment, potentially reducing the morbidity and mortality associated with heart disease.</p>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="card projects-card animated-slide-in">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://source.unsplash.com/random/4" alt="Project 2" class="img-fluid filter-effect">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Project 2</h5>
-                                <p class="card-text">ML based Heart Disease detection.</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="project-card">
+                <img src="C:\Users\KUNAL\OneDrive\Pictures\Screenshots\Screenshot 2024-05-31 043009.png" alt="Wellness Link-hub">
+                <div class="container">
+                    <h3>Wellness Link Hub</h3>
+                    <p>Ultimate Hospital portal</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.pexels.com/photos/326501/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Project 3">
+                <div class="container">
+                    <h3>Hotel Management</h3>
+                    <p>Manage your hotel with an ease.</p>
                 </div>
             </div>
         </div>
-    </section>
-   
-
+    </div>
+    <a href="https://github.com/erenyeager101" target="_blank" class="cta-button">Xplor more projects</a>
 
 
     <!-- Contact Section -->
-    <section id="contact" class="gradient-bg py-5 text-white text-center">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <p>You can reach me via email at <a href="mailto:sonnekunal2@gmail.com" class="text-white">sonnekunal2@gmail.com</a></p>
-            <p>Check out my <a href="https://github.com/erenyeager101" class="text-white">GitHub</a> for more projects.</p>
+    <div class="video-section">
+        <video autoplay muted loop>
+            <source src="C:\Users\KUNAL\Downloads\6894947-uhd_3840_2160_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="content">
+            <h2>Contact me</h2>
         </div>
-    </section>
+    </div>
+        <hr style="width:200px" class="w3-opacity">
+        <div class="w3-section">
+            <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Upper Indira Nagar bibwewadi ,Pune</p>
+            <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +91 8766727106</p>
+            <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: sonnekunal2@mail.com</p>
+        </div>
+        <br>
+        <p>Let's get in touch. Send me a message:</p>
+        <form action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+            <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+                <i class="fa fa-paper-plane"></i> SEND MESSAGE
+            </button>
+        </form>
+        <br>
+    </div>
 
     <!-- Footer -->
-    <footer class="text-center py-3">
-        <p>&copy; 2024 Kunal Sonne. All rights reserved.</p>
+    <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+        <p class="w3-medium">Kunal Sonne's Portfolio</p>
     </footer>
+</div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    window.addEventListener('scroll', function() {
+    var skillHeading = document.getElementById('skill-heading');
+    var skillHeadingPosition = skillHeading.getBoundingClientRect().top;
+    var windowHeight = window.innerHeight;
+
+    if (skillHeadingPosition < windowHeight * 0.75) {
+        skillHeading.classList.add('stretch');
+    } else {
+        skillHeading.classList.remove('stretch');
+    }
+});
+    
+
+    // window.addEventListener('scroll', function() {
+    //     let downloadButtonPosition = downloadButton.getBoundingClientRect();
+    //     if (downloadButtonPosition.top <= window.innerHeight && downloadButtonPosition.bottom >= 0) {
+    //         video.play();
+    //     } else {
+    //         video.pause();
+    //     }
+    // });
+
+    // Slideshow script
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+    window.addEventListener('scroll', function() {
+    var skillHeading = document.getElementById('skill-heading');
+    var skillHeadingPosition = skillHeading.getBoundingClientRect().top;
+    var windowHeight = window.innerHeight;
+
+    if (skillHeadingPosition < windowHeight * 0.75) {
+        skillHeading.classList.add('stretch');
+    } else {
+        skillHeading.classList.remove('stretch');
+    }
+});
+    
+</script>
+
 </body>
 </html>
