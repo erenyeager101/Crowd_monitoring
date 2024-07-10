@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,40 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" />
 
     <style>
-        body, h1, h2, h3, h4, h5, h6 {
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: "Montserrat", sans-serif;
         }
+
         .w3-row-padding img {
             margin-bottom: 12px;
         }
+
         .w3-sidebar {
             width: 120px;
             background: #333;
             padding-top: 20px;
         }
+
         #main {
             margin-left: 120px;
         }
+
         @media only screen and (max-width: 600px) {
             #main {
                 margin-left: 0;
             }
         }
+
         .w3-sidebar a {
             padding: 16px;
             text-decoration: none;
@@ -36,15 +49,18 @@
             color: white;
             display: block;
         }
+
         .w3-sidebar a:hover {
             background-color: #575757;
         }
+
         .background-video-container {
             position: relative;
             overflow: hidden;
             width: 100%;
-            height: 300px;
+            height: 200%;
         }
+
         .background-video-container video {
             position: absolute;
             top: 50%;
@@ -56,18 +72,21 @@
             z-index: 0;
             transform: translate(-50%, -50%);
         }
+
         .background-video-container .content {
             position: absolute;
             top: 50%;
-            left: 50%;
+
             transform: translate(-50%, -50%);
             z-index: 1;
             text-align: center;
         }
+
         .background-video-container .content h1 {
             color: white;
             font-size: 4em;
         }
+
         .projects-section {
             position: relative;
             padding: 64px 0;
@@ -75,14 +94,17 @@
             color: #fff;
             text-align: center;
         }
+
         .project-card {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             margin: 16px;
             background-color: #444;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: auto;
         }
+
         section {
             opacity: 0;
             transform: translateY(20px);
@@ -95,12 +117,34 @@
         }
 
         .projects-grid {
+            width: 100%;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            gap: 10px;
         }
 
+        .project-card iframe {
+            width: 100%;
+            /* Make iframe take full width of the card */
+            height: 450px;
+            /* Adjust height as needed */
+        }
+
+
         .project-card {
+            width: 100%;
+            /* Make the card full-width */
+            max-width: 600px;
+            /* Set a maximum width for the cards */
+            margin: 0 auto;
+            /* Center the cards */
+            padding: 20px;
+            /* Add some padding */
+            background-color: #333;
+            /* Background color */
+            border-radius: 10px;
+            /* Rounded corners */
             flex: 0 0 calc(33.33% - 20px);
             margin: 10px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -108,87 +152,119 @@
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
+
         .project-card .container {
             padding: 16px;
         }
+
         .project-card .container h3 {
             margin: 0;
         }
+
         .project-card .container p {
             margin: 8px 0 0;
         }
+
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
+
+        .video-container {
+            position: relative;
+            overflow: hidden;
+
+            width: 1280px;
+            /* Set the container width */
+            height: 480px;
+            /* Set the container height */
+        }
+
+        .video-container iframe {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+            transform: scale(1.5);
+            /* Adjust the scale to zoom in */
+            transform-origin: center;
+        }
+
         .skill-heading {
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
 
-.skill-heading h2 {
-    font-size: 3em;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #444;
-    border-radius: 10px;
-    transition: all 0.5s ease;
-    transform-origin: top;
-}
+        .skill-heading h2 {
+            font-size: 3em;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #444;
+            border-radius: 10px;
+            transition: all 0.5s ease;
+            transform-origin: top;
+        }
 
-.skill-heading h2 span {
-    position: relative;
-    z-index: 2;
-}
+        .skill-heading h2 span {
+            position: relative;
+            z-index: 2;
+        }
 
-.skill-heading .emoji {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    font-size: 0.6em;
-    color: #555;
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
-}
+        .skill-heading .emoji {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            font-size: 0.6em;
+            color: #555;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+        }
 
-.skill-heading.stretch h2 {
-    transform: scaleY(1.5);
-    background-color: #333;
-}
+        .skill-heading.stretch h2 {
+            transform: scaleY(1.5);
+            background-color: #333;
+        }
 
-/* Additional styling as per your design */
+        /* Additional styling as per your design */
 
-.w3-card {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
 
-.w3-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-}
+        .w3-card {
+
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .w3-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
 
 
         /* Navbar animation */
         .w3-sidebar a {
             transition: background-color 0.3s ease-in-out;
         }
+
         .w3-sidebar a:hover {
             background-color: #575757;
         }
+
         .slideshow-container {
             position: relative;
             max-width: 1000px;
             margin: auto;
         }
+
         .mySlides {
             display: none;
         }
-        .prev, .next {
+
+        .prev,
+        .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
@@ -202,81 +278,103 @@
             border-radius: 0 3px 3px 0;
             user-select: none;
         }
+
         .video-section {
-    position: relative;
-    height: 500px; /* Adjust height as needed */
-    overflow: hidden;
-    margin-bottom: 64px; /* Space between video and projects section */
-}
+            position: relative;
+            height: 500px;
+            /* Adjust height as needed */
+            overflow: hidden;
+            margin-bottom: 64px;
+            /* Space between video and projects section */
+        }
 
-.video-section video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
+        .video-section video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
 
-.projects-section {
-    position: relative;
-    z-index: 1;
-    padding: 64px 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    color: #fff;
-    text-align: center;
-}
+        .projects-section {
+            position: relative;
+            z-index: 1;
+            padding: 64px 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            color: #fff;
+            text-align: center;
+        }
 
         .prev {
             left: 0;
             border-radius: 3px 0 0 3px;
         }
+
         .next {
             right: 0;
             border-radius: 3px 0 0 3px;
         }
-        .prev:hover, .next:hover {
-            background-color: rgba(0,0,0,0.8);
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
         }
+
         .fade {
             -webkit-animation-name: fade;
             -webkit-animation-duration: 1.5s;
             animation-name: fade;
             animation-duration: 1.5s;
         }
+
         @-webkit-keyframes fade {
-            from {opacity: .4} 
-            to {opacity: 1}
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
         }
+
         @keyframes fade {
-            from {opacity: .4} 
-            to {opacity: 1}
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
         }
+
         .heading-text {
-        position: relative;
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #444;
-        border-radius: 10px;
-        text-transform: uppercase;
-        color: #fff;
-        transform: translateZ(0);
-        transition: transform 0.3s ease-out;
-    }
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #444;
+            border-radius: 10px;
+            text-transform: uppercase;
+            color: #fff;
+            transform: translateZ(0);
+            transition: transform 0.3s ease-out;
+        }
 
-    .heading-shadow {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        color: rgba(0, 0, 0, 0.2);
-        transform: translate(3px, 3px) scale(1.05);
-    }
+        .heading-shadow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            color: rgba(0, 0, 0, 0.2);
+            transform: translate(3px, 3px) scale(1.05);
+        }
 
-    .heading-text:hover {
-        transform: translateY(-3px);
-    }
+        .heading-text:hover {
+            transform: translateY(-15px);
+        }
+
         .dot {
             cursor: pointer;
             height: 15px;
@@ -287,18 +385,23 @@
             display: inline-block;
             transition: background-color 0.6s ease;
         }
-        .active, .dot:hover {
+
+        .active,
+        .dot:hover {
             background-color: #717171;
         }
+
         html {
             scroll-behavior: smooth;
         }
+
         .video-section {
             position: relative;
             overflow: hidden;
             width: 100%;
             height: 300px;
         }
+
         .video-section video {
             position: absolute;
             top: 50%;
@@ -310,6 +413,7 @@
             z-index: 0;
             transform: translate(-50%, -50%);
         }
+
         .video-section .content {
             position: absolute;
             top: 50%;
@@ -318,91 +422,92 @@
             z-index: 1;
             text-align: center;
         }
+
         .video-section .content h2 {
             color: white;
             font-size: 2em;
         }
-        .projects-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+
         .skill-heading {
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.skill-heading h2 {
-    font-size: 3em;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #444;
-    border-radius: 10px;
-    transition: width 0.5s ease;
-}
-
-.skill-heading h2 span {
-    position: relative;
-    z-index: 2;
-}
-
-.skill-heading .emoji {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    font-size: 0.6em;
-    color: #555;
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
-}
-
-.skill-heading.stretch h2 {
-    width: 100%;
-    padding: 50px 0;
-    font-size: 4em;
-}
-.heading-text {
-        position: relative;
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #0b0a0a;
-        border-radius: 10px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        text-transform: uppercase;
-        color: #faf4f4; 
-        /* text ka color */
-    }
-
-    .heading-shadow {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        color: rgba(245, 241, 241, 0.2);
-        transform: translate(3px, 3px) scale(1.05);
-    }
-
-    /* Animation for heading movement */
-    @keyframes headingMovement {
-        0% {
-            transform: translateX(0);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
         }
-        50% {
-            transform: translateX(12px);
-        }
-        100% {
-            transform: translateX(0);
-        }
-    }
 
-    .heading-text {
-        animation: headingMovement 2s ease-in-out infinite;
-    }
-    .cta-button {
-        position: absolute;
+        .skill-heading h2 {
+            font-size: 3em;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #444;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .skill-heading h2 span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-heading .emoji {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            font-size: 0.6em;
+            color: #555;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-heading.stretch h2 {
+            width: 100%;
+            padding: 50px 0;
+            font-size: 4em;
+        }
+
+        .heading-text {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0b0a0a;
+            border-radius: 10px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-transform: uppercase;
+            color: #faf4f4;
+            /* text ka color */
+        }
+
+        .heading-shadow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            color: rgba(10, 10, 10, 0.2);
+            transform: translate(3px, 3px) scale(1.55);
+        }
+
+        /* Animation for heading movement */
+        @keyframes headingMovement {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(12px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .heading-text {
+            animation: headingMovement 6s ease-in-out infinite;
+        }
+
+        .cta-button {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -414,298 +519,473 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
+
         .cta-button:hover {
             background-color: #2980b9;
         }
 
-/* Additional styling as per your design */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease-out;
+            position: absolute;
+            transition: left 0.3s ease-out, top 0.3s ease-out;
+            /* Smooth transition effect */
 
+
+
+        }
+
+        .chatbot-icon:hover {
+            transform: translate(-20px, -20px);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #fff;
+            padding-top: 150px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .card-container {
+            width: 100%;
+            display: flex;
+            justify-content: left;
+            gap: 20px;
+            padding: 10px;
+            margin-right: 20px;
+            flex-direction: column;
+        }
+
+        .card-container1 {
+            width: 100%;
+            display: flex;
+            justify-content: right;
+            gap: 20px;
+            padding: 10px;
+            display: flex;
+
+            align-items: center;
+        }
+
+        .card {
+            flex: 1;
+            position: relative;
+            max-width: 500px;
+            min-width: 100px;
+            height: 500px;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .card .image {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card .info {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+
+        }
+
+        .card:hover .image {
+            transform: translateX(-100%);
+        }
+
+        .card:hover .info {
+            left: 0;
+        }
+
+        .card .info h2 {
+            margin: 0;
+            padding: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .card .info p {
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body class="w3-black">
-
-<!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="w3-sidebar w3-bar-block w3-small w3-center">
-      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
-        <i class="fa fa-home w3-xxlarge"></i>
-        <p>HOME</p>
-    </a>
-    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
-        <i class="fa fa-user w3-xxlarge"></i>
-        <p>ABOUT</p>
-    </a>
-    <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
-        <i class="fa fa-eye w3-xxlarge"></i>
-        <p>PROJECTS</p>
-    </a>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
-        <i class="fa fa-envelope w3-xxlarge"></i>
-        <p>CONTACT</p>
-    </a>
-</nav>
-
-<!-- Navbar on small screens (Hidden on medium and large screens) -->
-<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-    <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-        <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-        <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
-        <a href="#projects" class="w3-bar-item w3-button" style="width:25% !important">PROJECTS</a>
-        <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+    <div class="chatbot-icon" id="chatbot-icon">
+        <img src="https://cdn.icon-icons.com/icons2/855/PNG/512/Android_Robot_social_media_corporate_logo_icon-icons.com_67679.png"
+            alt="Chatbot Icon" width="50" height="50">
     </div>
-</div>
 
-<!-- Page Content -->
-<div class="w3-padding-large" id="main">
-    <!-- Header/Home -->
-    <header class="background-video-container">
-        <video autoplay muted loop>
-            <source src="https://www.canva.com/design/DAGJUILvmyk/3iaOh5_F2YDXnuRs9mgm3g/view?utm_content=DAGJUILvmyk&utm_campaign=designshare&utm_medium=link&utm_source=editor" type="video/mp4">
-        </video>
-        <div class="content">
-            <h1>Kunal Sonne</h1>
-        </div>
-    </header>
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav class="w3-sidebar w3-bar-block w3-small w3-center">
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+            <i class="fa fa-home w3-xxlarge"></i>
+            <p>HOME</p>
+        </a>
+        <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+            <i class="fa fa-user w3-xxlarge"></i>
+            <p>ABOUT</p>
+        </a>
+        <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+            <i class="fa fa-eye w3-xxlarge"></i>
+            <p>PROJECTS</p>
+        </a>
+        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-grey">
+            <i class="fa fa-envelope w3-xxlarge"></i>
+            <p>CONTACT</p>
+        </a>
+    </nav>
 
-    <!-- About Section -->
-    <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-        <h2 class="w3-text-light-grey">About Me</h2>
-        <hr style="width:200px" class="w3-opacity">
-        <p>Hi, I'm Kunal Sonne, a passionate coder with a keen interest in web development. I'm constantly exploring new technologies to enhance my skills. Beyond coding, I'm a movie buff and anime enthusiast. There's something magical about the storytelling in movies and anime that captivates my imagination. When I'm not coding or immersed in a film, you can find me learning and expanding my horizons. Join me on this journey as I continue to grow, innovate, and make my mark in the world of technology and creativity.</p>
-        <div style="text-align: center;">
-            <h2 class="w3-text-light-grey" style="font-size: 3em; position: relative; display: inline-block; padding: 10px 20px; background-color: #444; border-radius: 10px; text-transform: uppercase; animation: headingMovement 5s ease-in-out infinite;">
-                <span class="heading-text"> Skills</span>
-                <span class="heading-shadow">Web dev</span>
-            </h2>
-            <h1>"College student passionate about machine learning and data analysis, focused on leveraging AI to solve real-world challenges."</h1>
+    <!-- Navbar on small screens (Hidden on medium and large screens) -->
+    <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+        <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+            <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+            <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+            <a href="#projects" class="w3-bar-item w3-button" style="width:25% !important">PROJECTS</a>
+            <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
         </div>
-        </div>
-        
-        <div class="w3-row-padding w3-margin-top">
-            <!-- Web Dev Card -->
-            <div class="w3-third">
-                <div class="w3-card w3-padding w3-margin-bottom">
-                    <h3 class="w3-text-light-grey">Web Development</h3>
-                    <p class="w3-wide">HTML</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="w3-padding-large" id="main">
+        <!-- Header/Home -->
+        <header class="background-video-container">
+
+            <header>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube.com/embed/3-iCDOYkfms?autoplay=1&mute=1&loop=1&playlist=3-iCDOYkfms"
+                        allow="autoplay; encrypted-media; loop" allowfullscreen></iframe>
+                        <h2>Welcome</h2>
+
+                </div>
+            </header>
+
+
+            <!-- About Section -->
+            <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+                <h2 class="w3-text-light-grey">About Me</h2>
+                <hr style="width:200px" class="w3-opacity">
+                <p>Hi, I'm Kunal Sonne, a passionate coder with a keen interest in web development. I'm constantly
+                    exploring new technologies to enhance my skills. Beyond coding, I'm a movie buff and anime
+                    enthusiast. There's something magical about the storytelling in movies and anime that captivates my
+                    imagination. When I'm not coding or immersed in a film, you can find me learning and expanding my
+                    horizons. Join me on this journey as I continue to grow, innovate, and make my mark in the world of
+                    technology and creativity.</p>
+                <div style="text-align: center;">
+                    <h2 class="w3-text-light-grey"
+                        style="font-size: 3em; position: relative; display: inline-block; padding: 10px 20px; background-color: #fd0de1; border-radius: 10px; text-transform: uppercase; animation: headingMovement 9s ease-in-out infinite;">
+                        <span class="heading-text"> Skill</span>
+                        <span class="heading-shadow">Spectrum</span>
+                    </h2>
+                    <h1>I'm a College student passionate about programming and applying it to real world problems, focused on leveraging AI
+                        to solve real-world challenges."</h1>
+                </div>
+            </div>
+
+            <div class="w3-row-padding w3-margin-top">
+                <!-- Web Dev Card -->
+                <div class="w3-third">
+                    <div class="w3-card w3-padding w3-margin-bottom">
+                        <h3 class="w3-text-light-grey">Web Development</h3>
+                        <p class="w3-wide">HTML</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+                        </div>
+                        <p class="w3-wide">CSS</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:65%"></div>
+                        </div>
+                        <p class="w3-wide">JavaScript</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:50%"></div>
+                        </div>
+                        <p class="w3-wide">React</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:45%"></div>
+                        </div>
+                        <p class="w3-wide">Node.js</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:30%"></div>
+                        </div>
                     </div>
-                    <p class="w3-wide">CSS</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:65%"></div>
+                </div>
+
+                <!-- Languages Card -->
+                <div class="w3-third">
+                    <div class="w3-card w3-padding w3-margin-bottom">
+                        <h3 class="w3-text-light-grey">Languages</h3>
+                        <p class="w3-wide">Python</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:55%"></div>
+                        </div>
+                        <p class="w3-wide">C</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+                        </div>
+                        <p class="w3-wide">Java</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:20%"></div>
+                        </div>
                     </div>
-                    <p class="w3-wide">JavaScript</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:50%"></div>
-                    </div>
-                    <p class="w3-wide">React</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:45%"></div>
-                    </div>
-                    <p class="w3-wide">Node.js</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:30%"></div>
+                </div>
+
+                <!-- Softskills Card -->
+                <div class="w3-third">
+                    <div class="w3-card w3-padding w3-margin-bottom">
+                        <h3 class="w3-text-light-grey">Softskills</h3>
+                        <p>Teamwork</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:90%"></div>
+                        </div>
+                        <p>Communication</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:55%"></div>
+                        </div>
+                        <p>Problem Solving</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+                        </div>
+                        <p>Time Management</p>
+                        <div class="w3-white">
+                            <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:45%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-    
-            <!-- Languages Card -->
-            <div class="w3-third">
-                <div class="w3-card w3-padding w3-margin-bottom">
-                    <h3 class="w3-text-light-grey">Languages</h3>
-                    <p class="w3-wide">Python</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:55%"></div>
+            <header>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube.com/embed/OHz0xIR8uwI?autoplay=1&mute=1&loop=1&playlist=OHz0xIR8uwI"
+                        allow="autoplay; encrypted-media; loop" allowfullscreen></iframe>
+
+                </div>
+                <h2>Projects</h2>
+            </header>
+
+            <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="projects">
+
+                <h2 class="w3-text-light-grey">Github Projects</h2>
+                <hr style="width:200px" class="w3-opacity">
+                <div class="w3-row-padding" style="margin:0 -16px">
+
+
+                    <div class="projects-grid">
+                        <div class="card-container">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="C:\Users\KUNAL\OneDrive\Pictures\Screenshots\Q6_Image1_EDAI2.png"
+                                        alt="Project 1">
+                                </div>
+                                <div class="info">
+
+                                    <h2>Heart Disease Detection</h2>
+                                    <p>Machine learning project for predicting heart disease using a random forest
+                                        classifier.</p>
+                                    <a href="https://github.com/erenyeager101/heart-disease-detection"
+                                        class="w3-button w3-light-grey w3-margin-bottom"><i
+                                            class="fa fa-github w3-margin-right"></i>View</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-container">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="C:\Users\KUNAL\OneDrive\Pictures\Screenshots\Q6_Image1_EDAI2.png"
+                                        alt="Project 2">
+                                </div>
+                                <div class="info">
+                                    <h2>Wellness LinkHub</h2>
+                                    <p>A web application to manage hospital and its services with ease.</p>
+                                    <a href="https://github.com/erenyeager101/wellness-linkhub"
+                                        class="w3-button w3-light-grey w3-margin-bottom"><i
+                                            class="fa fa-github w3-margin-right"></i>View</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-container1">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="C:\Users\KUNAL\OneDrive\Pictures\Screenshots\Q6_Image1_EDAI2.png"
+                                        alt="Project 3">
+                                </div>
+                                <div class="info">
+                                    <h2>Hotel Management System</h2>
+                                    <p>A C language project for managing operations efficiently.</p>
+                                    <a href="https://github.com/erenyeager101/hotel-management"
+                                        class="w3-button w3-light-grey w3-margin-bottom"><i
+                                            class="fa fa-github w3-margin-right"></i>View</a>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
-                    <p class="w3-wide">C</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
+                    <div class="background-video-container">
+                        <iframe class="autoplay-video" width="1110" height="415"
+                            src="https://www.youtube.com/embed/3Txp134133s?autoplay=1&3Txp134133s" title="ML project"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    <p class="w3-wide">Java</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:20%"></div>
+
+
+                    <!-- Contact Section -->
+                    <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+                        <h2 class="w3-text-light-grey">Contact Me</h2>
+                        <hr style="width:200px" class="w3-opacity">
+                        <div class="w3-section">
+                            <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Pune, India</p>
+                            <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +91 1234567890</p>
+                            <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"></i> Email: <a
+                                    href="mailto:sonnekunal2@gmail.com">sonnekunal2@gmail.com</a></p>
+                        </div><br>
+                        <p>Let's get in touch. Send me a message:</p>
+                        <form action="/action_page.php" target="_blank">
+                            <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required
+                                    name="Name"></p>
+                            <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required
+                                    name="Email"></p>
+                            <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required
+                                    name="Subject"></p>
+                            <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required
+                                    name="Message"></p>
+                            <p>
+                                <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+                                    <i class="fa fa-paper-plane"></i> SEND MESSAGE
+                                </button>
+                            </p>
+                        </form>
+                        <!-- Footer -->
+                        <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+                            <div class="w3-section">
+                                <a href="https://github.com/KunalSonne" target="_blank"><i
+                                        class="fab fa-github w3-hover-opacity"></i></a>
+                                <a href="https://www.linkedin.com/in/kunal-sonne/" target="_blank"><i
+                                        class="fab fa-linkedin w3-hover-opacity"></i></a>
+                                <a href="https://twitter.com/KunalSonne" target="_blank"><i
+                                        class="fab fa-twitter w3-hover-opacity"></i></a>
+                            </div>
+                            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"
+                                    class="w3-hover-opacity">w3.css</a></p>
+                        </footer>
                     </div>
                 </div>
-            </div>
-    
-            <!-- Softskills Card -->
-            <div class="w3-third">
-                <div class="w3-card w3-padding w3-margin-bottom">
-                    <h3 class="w3-text-light-grey">Softskills</h3>
-                    <p>Teamwork</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:90%"></div>
-                    </div>
-                    <p>Communication</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:55%"></div>
-                    </div>
-                    <p>Problem Solving</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:80%"></div>
-                    </div>
-                    <p>Time Management</p>
-                    <div class="w3-white">
-                        <div class="w3-dark-grey w3-round-xlarge" style="height:28px;width:45%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-       
-    <a href="https://example.com" target="_blank" class="cta-button">Download Resume</a>
-
-    </div>
-
-    <!-- Second Video Section -->
-    <div class="video-section">
-        <video autoplay muted loop>
-            <source src="https://www.pexels.com/video/mixture-of-smoke-with-different-colors-2025634/" type="video/mp4">
-        </video>
-        <div class="content">
-            <h2>Projects</h2>
-        </div>
-    </div>
-
-    <!-- <div class="video-section" id="second-video">
-        <video id="second-fixed-video" src="C:\Users\KUNAL\Downloads\3051493-uhd_3840_2160_25fps.mp4" type="video/mp4"></video>
-        <div class="content">
-            <h2>Projects</h2>
-        </div>
-    </div> -->
-
-    <!-- Projects Section -->
-    <div class="projects-section w3-padding-64" id="projects">
-        <h2 class="w3-text-light-grey">Github Projects</h2>
-        <hr style="width:200px" class="w3-opacity">
-        <div class="projects-grid">
-            <div class="project-card">
-                <img src="https://github.com/erenyeager101/vite/blob/main/Q6_Image1_EDAI2.png" alt="Project 1">
-                <div class="container">
-                    <h3>ML based Heart Disease detection</h3>
-                    <p>eart disease detection using machine learning involves developing models to predict the presence or risk of heart disease based on various clinical and demographic data. The goal is to improve early diagnosis and facilitate timely treatment, potentially reducing the morbidity and mortality associated with heart disease.</p>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="C:\Users\KUNAL\OneDrive\Pictures\Screenshots\Screenshot 2024-05-31 043009.png" alt="Wellness Link-hub">
-                <div class="container">
-                    <h3>Wellness Link Hub</h3>
-                    <p>Ultimate Hospital portal</p>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://images.pexels.com/photos/326501/pexels-photo-326501.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Project 3">
-                <div class="container">
-                    <h3>Hotel Management</h3>
-                    <p>Manage your hotel with an ease.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a href="https://github.com/erenyeager101" target="_blank" class="cta-button">Xplor more projects</a>
-
-
-    <!-- Contact Section -->
-    <div class="video-section">
-        <video autoplay muted loop>
-            <source src="C:\Users\KUNAL\Downloads\6894947-uhd_3840_2160_30fps.mp4" type="video/mp4">
-        </video>
-        <div class="content">
-            <h2>Contact me</h2>
-        </div>
-    </div>
-        <hr style="width:200px" class="w3-opacity">
-        <div class="w3-section">
-            <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Upper Indira Nagar bibwewadi ,Pune</p>
-            <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +91 8766727106</p>
-            <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: sonnekunal2@mail.com</p>
-        </div>
-        <br>
-        <p>Let's get in touch. Send me a message:</p>
-        <form action="/action_page.php" target="_blank">
-            <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
-            <button class="w3-button w3-light-grey w3-padding-large" type="submit">
-                <i class="fa fa-paper-plane"></i> SEND MESSAGE
-            </button>
-        </form>
-        <br>
-    </div>
-
-    <!-- Footer -->
-    <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
-        <p class="w3-medium">Kunal Sonne's Portfolio</p>
-    </footer>
-</div>
-
+</body>
 <script>
-    window.addEventListener('scroll', function() {
-    var skillHeading = document.getElementById('skill-heading');
-    var skillHeadingPosition = skillHeading.getBoundingClientRect().top;
-    var windowHeight = window.innerHeight;
+    document.addEventListener("DOMContentLoaded", function () {
+        let options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.5
+        };
 
-    if (skillHeadingPosition < windowHeight * 0.75) {
-        skillHeading.classList.add('stretch');
-    } else {
-        skillHeading.classList.remove('stretch');
+        let callback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    let iframe = entry.target;
+                    let src = iframe.getAttribute('src');
+                    if (!src.includes('autoplay=1')) {
+                        iframe.setAttribute('src', src + '&autoplay=1');
+                    }
+                }
+            });
+        };
+
+        let observer = new IntersectionObserver(callback, options);
+
+        let target = document.querySelector('.autoplay-video');
+        observer.observe(target);
+    });
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-video', {
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
     }
-});
-    
 
-    // window.addEventListener('scroll', function() {
-    //     let downloadButtonPosition = downloadButton.getBoundingClientRect();
-    //     if (downloadButtonPosition.top <= window.innerHeight && downloadButtonPosition.bottom >= 0) {
-    //         video.play();
-    //     } else {
-    //         video.pause();
-    //     }
-    // });
-
-    // Slideshow script
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
+    function onPlayerReady(event) {
+        event.target.playVideo(); // Start playing the video
     }
 
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
+    window.addEventListener('load', function () {
+        var videoFrame = document.getElementById('video');
+        var videoSrc = videoFrame.src;
+        videoFrame.src = videoSrc + "&autoplay=1";
+        videoFrame.src = videoSrc + "&loop=1";
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var iframe = document.getElementById('video');
+        iframe.src += '?autoplay=1';
+        iframe.src += '?loop=1';
+    });
+
+
+    const chatbot = document.getElementById('chatbot-icon');
+    let screenWidth = window.innerWidth;
+    let screenHeight = window.innerHeight;
+
+    function getRandomPosition() {
+        const x = Math.random() * (screenWidth - 50);
+        const y = Math.random() * (screenHeight - 50);
+        return {
+            x,
+            y
+        };
     }
 
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {
-            slideIndex = 1;
-        }
-        if (n < 1) {
-            slideIndex = slides.length;
-        }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
+    function moveChatbot() {
+        const newPosition = getRandomPosition();
+        chatbot.style.left = `${newPosition.x}px`;
+        chatbot.style.top = `${newPosition.y}px`;
     }
-    window.addEventListener('scroll', function() {
-    var skillHeading = document.getElementById('skill-heading');
-    var skillHeadingPosition = skillHeading.getBoundingClientRect().top;
-    var windowHeight = window.innerHeight;
 
-    if (skillHeadingPosition < windowHeight * 0.75) {
-        skillHeading.classList.add('stretch');
-    } else {
-        skillHeading.classList.remove('stretch');
-    }
-});
-    
+    chatbot.addEventListener('mouseover', moveChatbot);
+
+    window.addEventListener('resize', () => {
+        screenWidth = window.innerWidth;
+        screenHeight = window.innerHeight;
+    });
 </script>
 
-</body>
 </html>
