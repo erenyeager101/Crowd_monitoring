@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+#map {
+    height: 100%;
+    width: 75%;
+}
+
+.info {
+    padding: 20px;
+    width: 25%;
+    background: #f9f9f9;
+    border-left: 2px solid #ddd;
+    overflow-y: auto;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    margin: 5px 0;
+}
+
+#peak-crowd, #average-crowd, #preferred-shop {
+    font-weight: bold;
+}
+
+.custom-icon {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: #f00; /* Default red color if not overridden */
+    opacity: 0.8;
+}
+
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime Crowd Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.js" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="map"></div>
+        <div class="info">
+            <h2>Crowd Statistics</h2>
+            <p>Peak Crowd: <span id="peak-crowd">Loading...</span></p>
+            <p>Average Crowd: <span id="average-crowd">Loading...</span></p>
+            <h3>Most Preferred Shop</h3>
+            <p id="preferred-shop">Loading...</p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
