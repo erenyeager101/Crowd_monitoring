@@ -1,4 +1,12 @@
 {
+
+  "name": "crowd-monitoring",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm run start-node & npm run start-python",
+    "start-node": "node server.js",
+    "start-python": "python detection.py"
+  },
   "dependencies": {
     "express": "^4.19.2",
     "http": "^0.0.1-security",
@@ -6,4 +14,7 @@
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5"
   }
+
+  
 }
+
