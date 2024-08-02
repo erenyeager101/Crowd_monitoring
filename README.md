@@ -101,4 +101,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
      ```
    - Ensure that the IP Camera server is started on your mobile device before running the project.
    - Point the camera to a crowd to count the number of people.
+3. **Current progress and issues faced**
+   -We tried to deploy this project but due to lack of resources we cant although we improved the UI/UX of the website pretty much but due to time congestions we couldnt 
+we have attached the deployment of our sample frontend of how this project would look like in future 
+`https://vite-woad-two-83.vercel.app/`
+   
 
