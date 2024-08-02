@@ -72,7 +72,7 @@ The project includes a visually appealing and user-friendly interface. The map v
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Example code to plot crowd data
+
 plt.figure(figsize=(10, 6))
 sns.barplot(x=locations, y=crowd_levels)
 plt.xlabel("Locations")
