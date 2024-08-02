@@ -16,7 +16,7 @@ Crowd monitoring and management using real-time data from IP camera and Laptop c
 - [License](#license)
 
 <p align="center">
-  <img src="https://github.com/yourusername/crowd-monitoring-and-management/blob/main/images/crowd_monitoring_ui.png" alt="Crowd Monitoring UI" width="600" />
+  <img src="https://drive.google.com/file/d/1B_glRXdw3XcSgxc8muE5WRl48OoObYpY/view?usp=sharing" alt="Crowd Monitoring UI" width="600" />
 </p>
 
 ## Overview
