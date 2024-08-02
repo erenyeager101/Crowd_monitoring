@@ -17,6 +17,8 @@ Crowd monitoring and management using real-time data from IP camera and Laptop c
 
 <p align="center">
   <img src="https://drive.google.com/file/d/1B_glRXdw3XcSgxc8muE5WRl48OoObYpY/view?usp=sharing" alt="Crowd Monitoring UI" width="600" />
+  ![Crowd_detection (prototype) UI](https://drive.google.com/uc?export=view&id=1B_glRXdw3XcSgxc8muE5WRl48OoObYpY)
+
 </p>
 
 ## Overview
