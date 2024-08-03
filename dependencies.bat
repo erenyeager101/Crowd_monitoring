@@ -16,7 +16,7 @@ pip install opencv-python-headless imutils numpy requests
 echo Installing React dependencies...
 cd .
 npx create-react-app my-app
-cd .
+cd my-app
 npm install leaflet react-leaflet socket.io-client axios @react-google-maps/api
 
 :: Set up MongoDB (Optional, if you're using MongoDB)
