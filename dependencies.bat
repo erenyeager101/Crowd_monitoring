@@ -3,20 +3,20 @@ echo Setting up project dependencies...
 
 :: Install Node.js dependencies
 echo Installing Node.js dependencies...
-cd path\to\your\nodejs\project
+cd .
 npm install express path socket.io
 
 :: Install Python dependencies
 echo Installing Python dependencies...
-cd path\to\your\python\project
+cd .
 python -m pip install --upgrade pip
 pip install opencv-python-headless imutils numpy requests
 
 :: Install React dependencies
 echo Installing React dependencies...
-cd path\to\your\react\project
+cd .
 npx create-react-app my-app
-cd my-app
+cd .
 npm install leaflet react-leaflet socket.io-client axios @react-google-maps/api
 
 :: Set up MongoDB (Optional, if you're using MongoDB)
