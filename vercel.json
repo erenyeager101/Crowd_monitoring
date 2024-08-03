@@ -1,35 +1,11 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "public/server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "build/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "public/index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "public/form.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "public/detection.py",
-      "use": "@vercel/python"
-    }
+    { "src": "server.js", "use": "@vercel/node" },
+    { "src": "detection.py", "use": "@vercel/python" }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "public/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/build/$1"
-    }
+    { "src": "/api/(.*)", "dest": "/server.js" },
+    { "src": "/detection/(.*)", "dest": "/detection.py" }
   ]
 }
