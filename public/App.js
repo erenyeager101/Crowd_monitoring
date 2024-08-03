@@ -69,3 +69,5 @@ document.addEventListener('DOMContentLoaded', () => {
     updateMap();
     setInterval(updateMap, 5000);
 });
+
+console.log("app is running")
