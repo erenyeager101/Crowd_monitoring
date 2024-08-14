@@ -16,7 +16,7 @@ Crowd monitoring and management using real-time data from IP camera and Laptop c
 - [License](#license)
 
 
-  ![Crowd_detection{ptototype)UI](https://drive.google.com/thumbnail?id=1B_glRXdw3XcSgxc8muE5WRl48OoObYpY)
+  ![Crowd_detection{ptototype)UI]([https://drive.google.com/thumbnail?id=1B_glRXdw3XcSgxc8muE5WRl48OoObYpY](https://github.com/erenyeager101/Crowd_monitoring/blob/main/Screenshot%202024-08-02%20122716.png))
 
 
 
