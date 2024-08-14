@@ -16,7 +16,9 @@ Crowd monitoring and management using real-time data from IP camera and Laptop c
 - [License](#license)
 
 
-  ![Web Development Frameworks]([Screenshot 2024-08-02 122716.png](https://drive.google.com/file/d/1B_glRXdw3XcSgxc8muE5WRl48OoObYpY/view?usp=sharing))
+ (![Web Development Frameworks](https://drive.google.com/uc?export=view&id=1B_glRXdw3XcSgxc8muE5WRl48OoObYpY)
+
+)
 
 
 
