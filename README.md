@@ -16,7 +16,7 @@ Crowd monitoring and management using real-time data from IP camera and Laptop c
 - [License](#license)
 
 
-  ![Web Development Frameworks]((https://github.com/erenyeager101/Crowd_monitoring/blob/main/Screenshot%202024-08-02%20122716.png))
+  ![Web Development Frameworks](Screenshot 2024-08-02 122716.png)
 
 
 
