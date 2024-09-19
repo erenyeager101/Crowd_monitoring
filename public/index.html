@@ -1,76 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-}
 
-.container {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-}
-
-#map {
-    height: 100%;
-    width: 75%;
-}
-
-.info {
-    padding: 20px;
-    width: 25%;
-    background: #f9f9f9;
-    border-left: 2px solid #ddd;
-    overflow-y: auto;
-}
-
-h2 {
-    margin-top: 0;
-}
-
-p {
-    margin: 5px 0;
-}
-
-#peak-crowd, #average-crowd, #preferred-shop {
-    font-weight: bold;
-}
-
-.custom-icon {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    background-color: #f00; /* Default red color if not overridden */
-    opacity: 0.8;
-}
-
-
-    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realtime Crowd Tracking</title>
+    <title>Realtime Crowd Monitoring</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.js" />
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .divplx{
+            color: #dbf709;
+            font-size: 50px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('C:\Users\KUNAL\Downloads\3130182-sd_640_360_30fps.mp4') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: #fff;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            z-index: 1;
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            background: #28a745;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1;
+            transition: background 0.3s;
+        }
+
+        .hero button:hover {
+            background: #218838;
+        }
+
+        /* Add Content Sections */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .feature {
+            width: 30%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Parallax Section */
+        .parallax {
+            background: url('https://cdn.britannica.com/84/203584-050-57D326E5/speed-internet-technology-background.jpg') center/cover no-repeat fixed;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 2rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.877);
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            overflow: hidden;
+            padding-top: 50px;
+        }
+
+        /* Map Styles */
+        #map {
+            height: 100%;
+            width: 75%;
+        }
+
+        /* Sidebar Info Styles */
+        .info {
+            padding: 30px;
+            width: 25%;
+            background: #f4f4f9;
+            border-left: 2px solid #ddd;
+            overflow-y: auto;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .info h2, .info h3 {
+            margin-bottom: 20px;
+        }
+
+        .info p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info #peak-crowd,
+        .info #average-crowd,
+        .info #preferred-shop {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        /* Button Styles */
+        .cta {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cta:hover {
+            background-color: #0056b3;
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom Icon */
+        .custom-icon {
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: #f00;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Realtime Crowd Monitoring</h1>
+        <p>Track crowd density in real-time and plan your visits more effectively.</p>
+        <button onclick="scrollToMap()">Explore Now</button>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Real-Time Data</h3>
+            <p>Get up-to-date crowd statistics at your fingertips. Know when it's best to visit your favorite spots.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🌍</div>
+            <h3>Global Coverage</h3>
+            <p>Monitor crowd density across multiple locations, all in real-time from anywhere in the world.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🔔</div>
+            <h3>Alerts & Notifications</h3>
+            <p>Receive alerts when your preferred location exceeds the crowd limit, helping you avoid overcrowding.</p>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="parallax">
+        <div class="divplx">
+            Discover the Future of Crowd Monitoring
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container fade-in" id="main-content">
+        <!-- Map Section -->
         <div id="map"></div>
+
+        <!-- Info Section -->
         <div class="info">
             <h2>Crowd Statistics</h2>
             <p>Peak Crowd: <span id="peak-crowd">Loading...</span></p>
             <p>Average Crowd: <span id="average-crowd">Loading...</span></p>
             <h3>Most Preferred Shop</h3>
             <p id="preferred-shop">Loading...</p>
+            <button class="cta">Refresh Data</button>
         </div>
     </div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="app.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Realtime Crowd Monitoring. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll to map section on button click
+        function scrollToMap() {
+            document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const map = L.map('map').setView([18.5204, 73.8567], 13);
+
+// Add a tile layer to the map (OpenStreetMap in this case)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Add a marker for Pune, Maharashtra, India
+const marker = L.marker([18.5204, 73.8567]).addTo(map)
+    
+            .bindPopup('Current Crowd: 150 People')
+            .openPopup();
+    </script>
 </body>
+
 </html>
