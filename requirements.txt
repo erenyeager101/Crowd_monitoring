@@ -3,6 +3,12 @@ opencv-python-headless==4.5.5.62
 imutils==0.5.4
 numpy==1.23.3
 requests==2.28.1
+bcrypt==3.2.2
+python-dotenv==1.0.0
+Flask==2.3.2
+requests==2.31.0
+pymongo==4.4.1
+Flask-SocketIO==5.3.5
 
 # Non-Python Dependencies (Node.js, React, etc.)
 # Please install the following dependencies manually:
