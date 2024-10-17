@@ -22,8 +22,8 @@ SERVER_URL = 'http://localhost:3000/update_data'
 
 CAMERAS = [
     {"source": 0, "coordinates": {"latitude": 18.5204, "longitude": 73.8567}},
-    {"source": "D:\\EDAI-FUNCTION-1610\\Crowd_monitoring\\crowd2.mp4" , "coordinates":{"latitude": 18.5250, "longitude": 73.8567}},
-    {"source": "D:\\EDAI-FUNCTION-1610\\Crowd_monitoring\\crowd.mp4" , "coordinates": {"latitude": 18.5369, "longitude": 73.8567}}
+    {"source": "https://raw.githubusercontent.com/erenyeager101/Crowd_monitoring/main/crowd.mp4" , "coordinates":{"latitude": 18.5250, "longitude": 73.8567}},
+    {"source": "https://raw.githubusercontent.com/erenyeager101/Crowd_monitoring/main/crowd2.mp4" , "coordinates": {"latitude": 18.5369, "longitude": 73.8567}}
 ]
 
 # MongoDB connection setup
