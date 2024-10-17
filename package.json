@@ -1,0 +1,44 @@
+{
+
+  "name": "crowd-monitoring",
+
+  "version": "1.0.0",
+
+  "scripts": {
+
+    "start": "npm run start-node & npm run start-python",
+
+    "start-node": "node server.js",
+
+    "start-python": "python detection.py"
+
+  },
+
+  "dependencies": {
+
+    "bcryptjs": "^2.4.3",
+
+    "body-parser": "^1.20.3",
+
+    "dotenv": "^16.4.5",
+
+    "express": "^4.21.1",
+
+    "http": "^0.0.1-security",
+
+    "jsonwebtoken": "^9.0.2",
+
+    "mongodb": "^6.9.0",
+
+    "mongoose": "^8.7.1",
+
+    "path": "^0.12.7",
+
+    "socket.io": "^4.7.5",
+
+    "socket.io-client": "^4.7.5"
+
+  }
+
+}
+

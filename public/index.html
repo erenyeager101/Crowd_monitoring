@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime Crowd Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            width: 100%;
+        }
+        #map {
+            height: 100%;
+            width: 70%;
+        }
+        .sidebar {
+            width: 30%;
+            padding: 20px;
+            background: #f9f9f9;
+            border-left: 2px solid #ddd;
+            overflow-y: auto;
+        }
+        h2, h3, h4 {
+            margin-top: 0;
+        }
+        p {
+            margin: 5px 0;
+        }
+        #peak-crowd, #average-crowd, #preferred-shop {
+            font-weight: bold;
+        }
+        .info-panel {
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            margin: 5px 0;
+            display: block;
+            width: 100%;
+        }
+        #history {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="map"></div>
+        <div class="sidebar">
+            <div class="info-panel">
+                <h2>Crowd Statistics</h2>
+                <p>Peak Crowd: <span id="peak-crowd">Loading...</span></p>
+                <p>Average Crowd: <span id="average-crowd">Loading...</span></p>
+                <h3>Most Preferred Shop</h3>
+                <p id="preferred-shop">Loading...</p>
+            </div>
+            
+            <div class="info-panel">
+                <h4>View Historical Data</h4>
+                <label for="lat">Latitude:</label>
+                <input type="text" id="lat" placeholder="Enter latitude" />
+                <label for="lng">Longitude:</label>
+                <input type="text" id="lng" placeholder="Enter longitude" />
+                <label for="time-range">Time Range (minutes):</label>
+                <select id="time-range">
+                    <option value="2">Last 2 minutes</option>
+                    <option value="10">Last 10 minutes</option>
+                    <option value="30">Last 30 minutes</option>
+                </select>
+                <button id="view-history">View History</button>
+            </div>
+            
+            <div id="history">
+                <h4>Historical Data</h4>
+                <!-- History data will be appended here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const viewHistoryButton = document.getElementById('view-history');
+            const latInput = document.getElementById('lat');
+            const lngInput = document.getElementById('lng');
+            const timeRangeSelect = document.getElementById('time-range');
+            const historyDiv = document.getElementById('history');
+    
+            viewHistoryButton.addEventListener('click', function() {
+                const lat = latInput.value;
+                const lng = lngInput.value;
+                const minutes = timeRangeSelect.value;
+    
+                if (!lat || !lng) {
+                    alert('Please enter both latitude and longitude.');
+                    return;
+                }
+    
+                // Show loading message
+                historyDiv.innerHTML = '<p>Loading historical data...</p>';
+    
+                // Fetch historical data
+                fetch(`/history?lat=${lat}&lng=${lng}&minutes=${minutes}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length === 0) {
+                            historyDiv.innerHTML = '<p>No historical data available for this location and time range.</p>';
+                        } else {
+                            let html = '<h4>Historical Data</h4><ul>';
+                            data.forEach(item => {
+                                html += `<li>Time: ${item.timestamp}, Count: ${item.count}</li>`;
+                            });
+                            html += '</ul>';
+                            historyDiv.innerHTML = html;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching historical data:', error);
+                        historyDiv.innerHTML = '<p>Error fetching historical data. Please try again.</p>';
+                    });
+            });
+        });
+    </script>
+    
+</body>
+</html>
