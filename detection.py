@@ -27,9 +27,8 @@ CAMERAS = [
 ]
 
 # MongoDB connection setup
-client = MongoClient("mongodb://kunalsonne:kunalsonne1847724@cluster0-shard-00-00.95mdg.mongodb.net:27017," \
-                     "cluster0-shard-00-01.95mdg.mongodb.net:27017," \
-                     "cluster0-shard-00-02.95mdg.mongodb.net:27017?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
+client = MongoClient("mongodb://kunalsonne:kunalsonne1847724@atlas-sql-6706b7ecf70b7322e5441261-95mdg.a.query.mongodb.net/Auth?ssl=true&authSource=admin
+")
 
 db = client['home']
 collection = db['blogs']
