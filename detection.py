@@ -18,7 +18,7 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
            "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
            "sofa", "train", "tvmonitor"]
 
-SERVER_URL = 'http://localhost:3000/update_data'
+SERVER_URL = 'https://crowd-monitoring-hack2skill.vercel.app/update_data'
 
 CAMERAS = [
     {"source": 0, "coordinates": {"latitude": 18.5204, "longitude": 73.8567}},
