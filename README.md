@@ -1,7 +1,7 @@
 
 # Crowd Monitoring and Management
 
-Crowd monitoring and management using real-time data from IP camera and Laptop camera footage which aims to provide users with insights into the crowd density at various locations espicially at local market places , shops ,malls. This helps users make informed decisions about visiting places based on the level of crowdiness.
+Crowd monitoring and management using real-time data from IP camera and static camera video footages which aims to provide users with insights into the crowd density at various locations espicially at local market places , shops ,malls.This proposed system will able to predict crowd on timel-basis and forecast the same. This helps users make informed decisions about visiting places based on the level of crowdiness.
 
 ## Table of Contents
 
