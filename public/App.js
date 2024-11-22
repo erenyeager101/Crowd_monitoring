@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let peakCrowd = 0;
     let totalCrowd = 0;
     let numberOfShops = 0;
+    const shopNames = {
+        '18.5204,73.8567': 'Zudio',
+        '18.5250,73.8567': 'Pheonix Mall',
+        '18.5369,73.8567': 'Kaka Halwai',
+        '18.5650,73.8567': 'Shaniwar Peth',
+        '18.5850,73.8567': 'Starbucks',
+    };
 
     function createIcon(color) {
         return L.divIcon({
@@ -35,65 +42,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 let maxCrowd = 0;
                 let minCrowd = Infinity;
                 let minCrowdLocation = '';
-
+                let maxShopName = '';
+                let minShopName = '';
+                
                 fetchedData.forEach(item => {
-                    const key = `${item.coordinates.latitude},${item.coordinates.longitude}`;
+                    const latitude = item.coordinates.latitude.toFixed(4);  
+                    const longitude = item.coordinates.longitude.toFixed(4); 
+                    const key = `${latitude},${longitude}`;
 
-                    // Keep markers intact
+                    const shopName = shopNames[key] || 'Unknown Shop';  
                     const color = item.count > 3 ? 'red' : 'yellow';
                     if (!markers[key]) {
                         const marker = L.marker([item.coordinates.latitude, item.coordinates.longitude], { icon: createIcon(color) }).addTo(map)
-                            .bindPopup(`Shop Count: ${item.count}`);
+                            .bindPopup(`Shop Name: ${shopName}<br>Shop Count: ${item.count}`);
                         markers[key] = marker;
                     } else {
-                        markers[key].setPopupContent(`Shop Count: ${item.count}`);
+                        markers[key].setPopupContent(`Shop Name: ${shopName}<br>Shop Count: ${item.count}`);
                         markers[key].setIcon(createIcon(color));
                     }
 
-                    // Draw heatmap circles (Green, Yellow, Red layers)
                     if (circles[key]) {
                         circles[key].forEach(circle => map.removeLayer(circle));
                     }
                     circles[key] = [];
 
-                    // Base circle (Green) is always shown
                     const greenCircle = L.circle([item.coordinates.latitude, item.coordinates.longitude], {
                         color: 'green',
                         fillColor: 'green',
                         fillOpacity: 0.3,
-                        radius: 50 // Adjust base green circle size
+                        radius: 50 
                     }).addTo(map);
                     circles[key].push(greenCircle);
 
-                    // Middle circle (Yellow) is shown if crowd >= 2
                     if (item.count >= 2) {
                         const yellowCircle = L.circle([item.coordinates.latitude, item.coordinates.longitude], {
                             color: 'yellow',
                             fillColor: 'yellow',
                             fillOpacity: 0.5,
-                            radius: 30 // Middle yellow circle radius
+                            radius: 30 
                         }).addTo(map);
                         circles[key].push(yellowCircle);
                     }
 
-                    // Inner circle (Red) is shown if crowd >= 5
                     if (item.count >= 5) {
                         const redCircle = L.circle([item.coordinates.latitude, item.coordinates.longitude], {
                             color: 'red',
                             fillColor: 'red',
                             fillOpacity: 0.6,
-                            radius: 45 // Smallest red circle radius
+                            radius: 45 
                         }).addTo(map);
                         circles[key].push(redCircle);
                     }
 
-                    // Update statistics
                     if (item.count > maxCrowd) {
                         maxCrowd = item.count;
+                        maxCrowdLocation = key;
+                        maxShopName = shopNames[maxCrowdLocation] || 'Unknown Shop';
                     }
                     if (item.count < minCrowd) {
                         minCrowd = item.count;
-                        minCrowdLocation = `${item.coordinates.latitude},${item.coordinates.longitude}`;
+                        minCrowdLocation = key;
+                        minShopName = shopNames[minCrowdLocation] || 'Unknown Shop';
                     }
 
                     totalCrowd += item.count;
@@ -105,12 +114,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.getElementById('peak-crowd').textContent = peakCrowd;
                 document.getElementById('average-crowd').textContent = averageCrowd;
-                document.getElementById('preferred-shop').textContent = minCrowdLocation ? `Shop Location: ${minCrowdLocation} with crowd: ${minCrowd}` : 'No data available';
+                document.getElementById('preferred-shop').textContent = minCrowdLocation ? `Shop Name: ${minShopName} with crowd: ${minCrowd}` : 'No data available';
+                document.getElementById('avoid-shop').textContent = maxCrowdLocation ? `Shop Name: ${maxShopName} with crowd: ${maxCrowd}` : 'No data available';
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
     }
+
+    document.getElementById('search-button').addEventListener('click', () => {
+        const searchInput = document.getElementById('search-shop').value.trim().toLowerCase();
+        let found = false;
+
+        for (const [coordinates, name] of Object.entries(shopNames)) {
+            if (name.toLowerCase() === searchInput) {
+                const [latitude, longitude] = coordinates.split(',').map(Number);
+                const count = markers[coordinates] ? markers[coordinates].getPopup().getContent().match(/Shop Count: (\d+)/)[1] : 'N/A';
+
+                document.getElementById('search-result').textContent = `Shop Name: ${name}, Coordinates: ${latitude}, ${longitude}, Crowd Count: ${count}`;
+                map.setView([latitude, longitude], 16); // Zoom in on the found shop
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            document.getElementById('search-result').textContent = 'Shop not found.';
+        }
+    });
 
     updateMap();
     setInterval(updateMap, 5000);
