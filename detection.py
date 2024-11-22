@@ -9,7 +9,6 @@ from pymongo import MongoClient
 import json
 from bson import ObjectId
 
-# Load pre-trained model
 protopath = "MobileNetSSD_deploy.prototxt"
 modelpath = "MobileNetSSD_deploy.caffemodel"
 
@@ -18,22 +17,19 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
            "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
            "sofa", "train", "tvmonitor"]
 
-SERVER_URL = 'https://crowd-monitoring-hack2skill.vercel.app/update_data'
+SERVER_URL = 'http://localhost:3000/update_data'
 
 CAMERAS = [
-    {"source": 0, "coordinates": {"latitude": 18.5204, "longitude": 73.8567}},
-    {"source": "https://raw.githubusercontent.com/erenyeager101/Crowd_monitoring/main/crowd.mp4" , "coordinates":{"latitude": 18.5250, "longitude": 73.8567}},
-    {"source": "https://raw.githubusercontent.com/erenyeager101/Crowd_monitoring/main/crowd2.mp4" , "coordinates": {"latitude": 18.5369, "longitude": 73.8567}}
+    {"source": "https://drive.google.com/uc?export=download&id=1i7wbKo3u7H1nW92BO_kMUHcOI2qgIDvY" , "coordinates": {"latitude": 18.5204, "longitude": 73.8567}},
+    {"source": "https://drive.google.com/uc?export=download&id=14gTAyQm1cvn3bF7eETKLof6PZ3c55hYU" , "coordinates":{"latitude": 18.5369, "longitude": 73.8567}},
+    {"source": 0 , "coordinates": {"latitude": 18.5850, "longitude": 73.8567}}
 ]
 
-# MongoDB connection setup
 client = MongoClient("mongodb+srv://kunalsonne:kunalsonne1847724@cluster0.95mdg.mongodb.net/?retryWrites=true&w=majority")
-
-
 db = client['home']
 collection = db['blogs']
 
-frame_skip = 5  # Process every 5th frame
+frame_skip = 11  
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -49,17 +45,15 @@ def send_data(count, coordinates):
         'timestamp': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     }
     
-    # Store data in MongoDB
     try:
         result = collection.insert_one(data)
-        data['_id'] = result.inserted_id  # Add the ObjectId to the data
+        data['_id'] = result.inserted_id  
         print(f"Data inserted into MongoDB: {data}")
     except Exception as e:
         print(f"Error inserting into MongoDB: {e}")
 
-    # Send the data to the server
     try:
-        json_data = json.dumps(data, cls=JSONEncoder)  # Use custom JSONEncoder
+        json_data = json.dumps(data, cls=JSONEncoder) 
         response = requests.post(SERVER_URL, data=json_data, headers={'Content-Type': 'application/json'})
         if response.status_code == 200:
             print("Data sent successfully")
@@ -79,7 +73,7 @@ def process_camera(cam_source, coordinates, window_name):
     total_frames = 0
     count = 0
     start_time = datetime.datetime.now()
-    frame_skip = 5  # Process every 5th frame for increased FPS
+    frame_skip = 5 
 
     while True:
         ret, frame = cap.read()
@@ -88,10 +82,10 @@ def process_camera(cam_source, coordinates, window_name):
             break
 
         total_frames += 1
-        if total_frames % frame_skip != 0:  # Skip frames to improve performance
+        if total_frames % frame_skip != 0: 
             continue
 
-        frame = imutils.resize(frame, width=400)  # Resize for better processing speed
+        frame = imutils.resize(frame, width=400)  
         (H, W) = frame.shape[:2]
         blob = cv2.dnn.blobFromImage(frame, 0.007843, (W, H), 127.5)
         detector.setInput(blob)
@@ -100,7 +94,7 @@ def process_camera(cam_source, coordinates, window_name):
         count = 0
         for i in np.arange(0, person_detections.shape[2]):
             confidence = person_detections[0, 0, i, 2]
-            if confidence > 0.3:
+            if confidence > 0.4:
                 idx = int(person_detections[0, 0, i, 1])
                 if CLASSES[idx] != "person":
                     continue
@@ -111,21 +105,20 @@ def process_camera(cam_source, coordinates, window_name):
                 count += 1
 
         print(f"{window_name} - Count: {count}")
-        send_data(count, coordinates)  # Send count and coordinates
+        send_data(count, coordinates)  
 
-        # Calculate FPS and display
         elapsed_time = (datetime.datetime.now() - start_time).total_seconds()
-        if elapsed_time > 0:  # Prevent division by zero
+        if elapsed_time > 0:  
             fps = total_frames / elapsed_time
         else:
-            fps = 0  # Set to 0 if no time has passed
+            fps = 0 
 
         fps_text = f"FPS: {fps:.2f}"
         count_text = f"Count: {count}"
         cv2.putText(frame, fps_text, (5, 30), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 1)
         cv2.putText(frame, count_text, (5, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 1)
 
-        if "DISPLAY" in os.environ or os.name == 'nt':  # Checks if a display is available
+        if "DISPLAY" in os.environ or os.name == 'nt':  
             cv2.imshow(window_name, frame)
             key = cv2.waitKey(1)
             if key == ord('q'):
