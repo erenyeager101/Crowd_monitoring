@@ -187,7 +187,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-mongoose.connect('mongodb+srv://kunalsonne:kunalsonne1847724@cluster0.95mdg.mongodb.net/Auth', {
+mongoose.connect('process.env.mongo_URL', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
