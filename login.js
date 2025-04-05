@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // MongoDB connection (replace with your own connection string)
-mongoose.connect('mongodb+srv://kunalsonne:kunalsonne1847724@cluster0.95mdg.mongodb.net/Auth', {
+mongoose.connect('process.env.mongo_URL', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
