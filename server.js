@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 
-const uri = "mongodb+srv://kunalsonne:kunalsonne1847724@cluster0.95mdg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "process.env.mongo_URL";
 
 const client = new MongoClient(uri);
 let collection;
