@@ -32,4 +32,4 @@ statsmodels==0.14.0
 
 # Deep learning (if any part of your project uses it)
 tensorflow==2.13.0  
-torch==2.1.0  
+torch==2.4.0  
