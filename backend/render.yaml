@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: crowd-monitoring-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    healthCheckPath: /health

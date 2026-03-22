@@ -14,9 +14,10 @@ A **modular, production-ready** crowd management and monitoring system with prov
 7. [Observability](#observability)
 8. [Testing](#testing)
 9. [Docker Deployment](#docker-deployment)
-10. [Migration from Legacy OpenCV Flow](#migration-from-legacy-opencv-flow)
-11. [Troubleshooting](#troubleshooting)
-12. [Security](#security)
+10. [Render Backend Deployment](#render-backend-deployment)
+11. [Migration from Legacy OpenCV Flow](#migration-from-legacy-opencv-flow)
+12. [Troubleshooting](#troubleshooting)
+13. [Security](#security)
 
 ---
 
@@ -309,6 +310,78 @@ docker compose up --build
 
 # Stop
 docker compose down
+```
+
+---
+
+## Render Backend Deployment
+
+The `backend/` directory contains a standalone Express server ready to deploy on [Render](https://render.com).
+
+### Files
+
+```
+backend/
+  server.js        → Single-file Express server
+  package.json     → Node.js dependencies & start script
+  .env.example     → Environment variable template
+  render.yaml      → Render service configuration
+```
+
+### 1. Deploy to Render
+
+1. Push this repository to GitHub (the `backend/` folder must be included).
+2. Log in to [Render](https://render.com) → **New +** → **Web Service**.
+3. Connect your GitHub repository (`erenyeager101/Crowd_monitoring`).
+4. Render will detect `backend/render.yaml` and auto-fill the settings:
+   - **Root Directory:** `backend`
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+   - **Health Check Path:** `/health`
+5. Click **Create Web Service**. Render will build and deploy automatically.
+6. Your backend URL will be: `https://<your-service-name>.onrender.com`
+
+### 2. Connect frontend (Vercel) to backend (Render)
+
+In your Vercel project:
+
+1. Go to **Settings → Environment Variables**.
+2. Add `VITE_API_BASE_URL` = `https://<your-service-name>.onrender.com`
+3. Redeploy the frontend.
+
+In the frontend code, call the backend as:
+
+```js
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+// Example
+const response = await fetch(`${API_BASE}/api/predict`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ /* your payload */ })
+});
+```
+
+### 3. Verify
+
+```bash
+# Health check
+curl https://<your-service-name>.onrender.com/health
+# Expected: {"ok":true,"service":"crowd-monitoring-backend","timestamp":"..."}
+
+# Base route
+curl https://<your-service-name>.onrender.com/
+# Expected: {"message":"Crowd Monitoring backend is running 🚀","docs":"Use /health for health checks"}
+```
+
+### Running locally
+
+```bash
+cd backend
+npm install
+cp .env.example .env   # edit PORT if needed
+npm start
+# Backend running on port 10000
 ```
 
 ---
