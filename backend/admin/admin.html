@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrowdSense – Admin Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f1117; --surface: #1a1d27; --surface2: #22263a;
+      --border: #2e3347; --accent: #4f8ef7; --text: #e2e8f0; --muted: #94a3b8;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .auth-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .auth-logo {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 32px;
+    }
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #4f8ef7, #7c5cbf);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .brand-name {
+      font-size: 20px; font-weight: 700;
+      background: linear-gradient(135deg, #4f8ef7, #7c5cbf);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .tabs {
+      display: flex; gap: 0;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+    .tab-btn {
+      flex: 1; padding: 9px;
+      font-size: 13.5px; font-weight: 500;
+      background: none; border: none; color: var(--muted);
+      border-radius: 7px; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active { background: var(--surface); color: var(--text); }
+    form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 12px; font-weight: 500; color: var(--muted); }
+    .form-input {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { outline: none; border-color: var(--accent); }
+    .form-input::placeholder { color: var(--muted); }
+    .submit-btn {
+      background: linear-gradient(135deg, #4f8ef7, #7c5cbf);
+      color: #fff; border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      margin-top: 4px;
+      transition: opacity 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.88; }
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      color: var(--muted); font-size: 12px; margin: 4px 0;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .dashboard-link {
+      display: block; text-align: center;
+      padding: 11px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13.5px; font-weight: 500;
+      color: var(--text);
+      background: var(--surface2);
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .dashboard-link:hover { background: var(--border); }
+    .footer-note {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-icon">📡</div>
+      <span class="brand-name">CrowdSense</span>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-signin" onclick="switchTab('signin')">Sign In</button>
+      <button class="tab-btn" id="tab-signup" onclick="switchTab('signup')">Register</button>
+    </div>
+
+    <!-- Sign In -->
+    <form id="form-signin" action="/signin" method="POST">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input class="form-input" type="email" name="email" placeholder="admin@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-input" type="password" name="password" placeholder="Enter password" required />
+      </div>
+      <button class="submit-btn" type="submit">Sign In</button>
+    </form>
+
+    <!-- Sign Up (hidden by default) -->
+    <form id="form-signup" action="/signup" method="POST" style="display:none">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input class="form-input" type="email" name="email" placeholder="admin@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-input" type="password" name="password" placeholder="Choose a password" required />
+      </div>
+      <button class="submit-btn" type="submit">Create Account</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    <a href="/crowd" class="dashboard-link">
+      📊 Go to Dashboard (no login)
+    </a>
+
+    <div class="footer-note">CrowdSense v2.0 · Group-15 SY-IT-C</div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      const isSignin = tab === 'signin';
+      document.getElementById('tab-signin').classList.toggle('active', isSignin);
+      document.getElementById('tab-signup').classList.toggle('active', !isSignin);
+      document.getElementById('form-signin').style.display = isSignin ? '' : 'none';
+      document.getElementById('form-signup').style.display = isSignin ? 'none' : '';
+    }
+  </script>
+</body>
+</html>

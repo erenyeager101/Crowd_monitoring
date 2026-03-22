@@ -1,0 +1,23 @@
+{
+  "name": "crowd-monitoring",
+  "version": "2.0.0",
+  "scripts": {
+    "start": "node server.js",
+    "start-node": "node server.js",
+    "start-python": "python -m crowd_engine",
+    "start-api": "uvicorn api_server:app --host 0.0.0.0 --port 8000"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.1",
+    "path": "^0.12.7",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5"
+  }
+}
