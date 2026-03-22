@@ -97,8 +97,50 @@ uvicorn api_server:app --port 8000
 python -m crowd_engine --cameras cameras.json
 ```
 
-- Dashboard: http://localhost:3000/crowd
-- API docs: http://localhost:8000/docs
+- **Dashboard (main):** http://localhost:3000/crowd
+- **Admin / Login:** http://localhost:3000/
+- **API docs:** http://localhost:8000/docs
+
+---
+
+## Frontend Dashboard
+
+The dashboard (`public/index.html`) is a single-page app with sidebar navigation that surfaces all available backend data.
+
+### Pages / Sections
+
+| Section | URL | Data Source |
+|---------|-----|-------------|
+| Overview | `/crowd` | `GET /data` — KPI cards, recent readings table, 3 real-time charts |
+| Live Map | `/crowd#live-map` | `GET /data` — Leaflet map with colour-coded crowd markers |
+| Shops | `/crowd#shops` | `GET /shops` + `GET /data` — Table of registered shops with live crowd status |
+| Trends & Charts | `/crowd#analytics` | `GET /data` — Time-series charts; shop comparison from `/api/historical-data` |
+| Top Locations | `/crowd#top-shops` | `GET /api/top-shops` — Bar chart + ranking table |
+| Heatmap Data | `/crowd#heatmap` | `GET /api/heatmap` — Grid view with density bars |
+| History | `/crowd#history` | `GET /history?shop=&time=` — Per-shop historical chart + table |
+| System Health | `/crowd#health` | `GET /health` (Node.js) + `GET http://localhost:8000/health` (Python) + `/api/v1/orchestrator/health` |
+
+### Features
+
+- **Dark-mode responsive UI** — sidebar collapses to hamburger on mobile.
+- **Loading / empty / error states** — every data-driven view shows a spinner, empty illustration, or error message.
+- **Live updates** — crowd data auto-refreshes every 5 seconds.
+- **Status badges** — colour-coded Low / Moderate / High crowd indicators on every reading.
+- **Inline search / filter** — Recent readings and Shops tables both support client-side text search.
+- **Shop comparison chart** — choose two locations and load their historical crowd trends side-by-side.
+- **Map search** — type a shop name to zoom the Leaflet map to that location.
+
+### Running the Frontend
+
+```bash
+# Just the Node.js server (serves the dashboard at :3000)
+npm start
+
+# With Python API for advanced estimation (optional, adds System Health data)
+uvicorn api_server:app --port 8000 --reload
+```
+
+The frontend degrades gracefully if the Python API is not running — all Node.js endpoints still work and the System Health section shows a clear "offline" message.
 
 ---
 
