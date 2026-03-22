@@ -7,7 +7,7 @@ pydantic==2.9.2
 opencv-python-headless==4.8.1.78
 imutils==0.5.4
 numpy==1.26.4
-Pillow==10.4.0
+Pillow==12.1.1
 
 # ── Flask and its extensions (prediction / model API) ────────────────────
 Flask==3.0.3
@@ -20,7 +20,7 @@ pandas==2.2.3
 matplotlib==3.9.2
 
 # ── HuggingFace / local model provider ───────────────────────────────────
-transformers==4.44.2
+transformers==4.48.0
 # torch is optional — comment out if running CPU-only in CI to reduce install time
 # torch==2.4.0
 
