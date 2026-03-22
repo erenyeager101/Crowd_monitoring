@@ -6,10 +6,15 @@ on:
   pull_request:
     branches: ["main"]
 
+permissions:
+  contents: read
+
 jobs:
   test-python:
     name: Python Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +48,8 @@ jobs:
   lint-python:
     name: Python Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -61,6 +68,8 @@ jobs:
   test-node:
     name: Node.js Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -80,6 +89,8 @@ jobs:
   docker-build:
     name: Docker Build Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
