@@ -1,116 +1,319 @@
+# Crowd Management & Monitoring Platform
 
-# Crowd Monitoring and Management
+A **modular, production-ready** crowd management and monitoring system with provider-agnostic crowd estimation, automatic fallback chain, and real-time dashboard.
 
-Crowd monitoring and management using real-time CCTV footages as well as video footages from different sources which aims to provide users with insights into the crowd density at various locations espicially at local market places , shops ,malls.This proposed system will able to predict crowd on timel-basis and forecast the same on timely basis. This helps users make informed decisions about visiting places based on the level of crowdiness.
+---
 
 ## Table of Contents
+1. [Architecture](#architecture)
+2. [Quick Start](#quick-start)
+3. [Environment Variables](#environment-variables)
+4. [Provider Configuration](#provider-configuration)
+5. [Fallback Behavior](#fallback-behavior)
+6. [API Reference](#api-reference)
+7. [Observability](#observability)
+8. [Testing](#testing)
+9. [Docker Deployment](#docker-deployment)
+10. [Migration from Legacy OpenCV Flow](#migration-from-legacy-opencv-flow)
+11. [Troubleshooting](#troubleshooting)
+12. [Security](#security)
 
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Data Collection](#data-collection)
-- [UI and Visualization](#ui-and-visualization)
-- [Server-Side Functionality](#server-side-functionality)
-- [Contributing](#contributing)
-- [License](#license)
+---
 
+## Architecture
 
- (![Web Development Frameworks](https://drive.google.com/uc?export=view&id=1B_glRXdw3XcSgxc8muE5WRl48OoObYpY)
+```
+crowd_engine/ (Python package)
+├── domain/
+│   ├── entities.py     → CrowdEstimate, CameraInput
+│   └── interfaces.py   → CrowdCountProvider (Protocol)
+├── providers/
+│   ├── roboflow_provider.py   ← PRIMARY  (API, free tier)
+│   ├── huggingface_provider.py← SECONDARY (local OSS model)
+│   ├── geospatial_provider.py ← TERTIARY (OSM heuristic proxy)
+│   └── opencv_provider.py     ← FALLBACK (legacy MobileNetSSD)
+├── services/
+│   ├── orchestrator.py  → FallbackOrchestrator
+│   ├── health.py        → HealthService
+│   └── factory.py       → build_orchestrator()
+├── infra/
+│   ├── config.py  → Settings (env-var backed, typed)
+│   └── logger.py  → Structured logging + correlation IDs
+└── __main__.py    → CLI entry point
 
-)
+api_server.py      → FastAPI REST API (OpenAPI docs at /docs)
+server.js          → Node.js dashboard (existing, enhanced)
+tests/
+├── unit/          → Provider + orchestrator + entity tests
+└── integration/   → API endpoint contract tests
+```
 
+### Key design decisions
 
+| Decision | Rationale |
+|----------|-----------|
+| Provider Protocol (structural typing) | Zero-coupling — add new providers without touching orchestrator |
+| Fallback chain configured via env var | Ops can swap provider order without code changes |
+| Circuit breaker per provider | Prevents cascade failures if one API goes down |
+| FastAPI for Python API layer | OpenAPI docs out-of-the-box, async-ready, typed |
+| Keep Node.js dashboard intact | Preserves existing frontend; Python engine is plugged in |
 
+---
 
+## Quick Start
 
+### Prerequisites
+- Python 3.11+
+- Node.js 20+
+- MongoDB (local or Atlas)
 
-
-## Overview
-
-The goal of this project is to track and manage crowd density in real-time using CCTV footage. The system detects the number of people at a location, provides an option to input coordinates, and displays the crowd data on a map. It also shows peak and average crowd levels, using color coding to indicate crowd intensity.
-
-## Features
-
-- Real-time detection of crowd density using IP camera and laptop camera footage(Prototype)
-- Input of coordinates for location-specific monitoring
-- Display of crowd data on a map with color coding (red for high crowd, yellow for low crowd)
-- Calculation and display of `max_crowd`, `average_crowd`, and `preffered_shop`
-- UI enhancements for a user-friendly experience
-
-## Installation
-
-To set up the project, clone the repository and install the required dependencies.
+### 1. Clone and install
 
 ```bash
 git clone https://github.com/erenyeager101/Crowd_monitoring.git
 cd Crowd_monitoring
+
+pip install -r requirements.txt
+npm install
 ```
 
-Ensure you have all dependencies installed by running:
+### 2. Configure environment
 
 ```bash
-dependencies.bat
+cp .env.example .env
+# Edit .env — set MONGO_URI and optionally ROBOFLOW_API_KEY
 ```
 
-## Usage
-
-To start the application, run the main script in the root directory:
+### 3. Start services
 
 ```bash
-start.bat
+# Terminal 1 — Node.js dashboard (port 3000)
+npm run start-node
+
+# Terminal 2 — Python crowd estimation API (port 8000)
+uvicorn api_server:app --port 8000
+
+# Terminal 3 — Crowd detection engine (reads cameras.json)
+python -m crowd_engine --cameras cameras.json
 ```
 
-Access the web interface at `http://localhost:3000` and follow the on-screen instructions to view and interact with the crowd data.
+- Dashboard: http://localhost:3000/crowd
+- API docs: http://localhost:8000/docs
 
-## Data Collection
+---
 
-The system uses IP camera on android device or laptop camera footage to detect the number of people at a specific location. This data, along with coordinates and IP address, is sent to the server to update the map with the crowd information.
+## Environment Variables
 
-## UI and Visualization
+Copy `.env.example` to `.env`. **Never commit `.env` to version control.**
 
-The project includes a visually appealing and user-friendly interface. The map visualization helps users easily identify crowded areas and make decisions accordingly.
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MONGO_URI` | `mongodb://localhost:27017` | MongoDB connection string |
+| `PORT` | `3000` | Node.js server port |
+| `API_PORT` | `8000` | Python API port |
+| `API_SECRET_KEY` | `changeme` | Change in production |
+| `PROVIDER_CHAIN` | `roboflow,huggingface,geospatial,opencv` | Ordered fallback chain |
+| `ROBOFLOW_API_KEY` | *(empty)* | Free-tier key from roboflow.com |
+| `HF_MODEL` | `facebook/detr-resnet-50` | HuggingFace model |
+| `HF_API_KEY` | *(empty)* | HuggingFace Inference API key |
+| `OPENCV_PROTOTXT` | `MobileNetSSD_deploy.prototxt` | Model proto path |
+| `OPENCV_CAFFEMODEL` | `MobileNetSSD_deploy.caffemodel` | Model weights path |
+| `PROVIDER_TIMEOUT_SECONDS` | `10.0` | Per-provider timeout |
+| `PROVIDER_MAX_RETRIES` | `2` | Retries per provider |
+| `CIRCUIT_BREAKER_THRESHOLD` | `3` | Failures before circuit opens |
+| `CIRCUIT_BREAKER_RESET_SECONDS` | `60` | Auto-reset after N seconds |
+| `LOG_LEVEL` | `INFO` | DEBUG / INFO / WARNING / ERROR |
+| `LOG_JSON` | `false` | true = JSON-line logs (production) |
+| `RATE_LIMIT_PER_MINUTE` | `60` | API rate limit per IP |
 
-```python
-import matplotlib.pyplot as plt
-import seaborn as sns
+---
 
+## Provider Configuration
 
-plt.figure(figsize=(10, 6))
-sns.barplot(x=locations, y=crowd_levels)
-plt.xlabel("Locations")
-plt.ylabel("Crowd Levels")
-plt.show()
+### Provider Chain
+
+```bash
+# Production (full chain)
+PROVIDER_CHAIN=roboflow,huggingface,geospatial,opencv
+
+# Offline / no API keys
+PROVIDER_CHAIN=huggingface,opencv
+
+# Development only
+PROVIDER_CHAIN=opencv
 ```
 
-## Server-Side Functionality
+### Roboflow (Primary API provider)
+- **Free tier:** Yes — sign up at roboflow.com
+- **Accuracy:** High
+- **Latency:** 200–500 ms
+- Set `ROBOFLOW_API_KEY`
 
-The server processes the incoming data, updates the crowd information on the map, and calculates the `max_crowd`, `average_crowd`, and `preffered_shop` values. It also provides real-time updates to the UI.
+### HuggingFace (Secondary — local open-source model)
+- **Free tier:** Yes — no API key for local inference
+- **Model:** `facebook/detr-resnet-50` (Apache 2.0, COCO)
+- **First run:** Downloads ~170 MB model
+- **Latency:** 1–5 s CPU, ~200 ms GPU
+- Requires `transformers` + `torch` (in requirements.txt)
 
-## Contributing
+### Geospatial/OSM (Tertiary — proxy)
+- **Free tier:** Yes — OpenStreetMap Nominatim, no key
+- **Accuracy:** Low (heuristic, not real-time)
+- **Confidence:** Capped at 0.35 (clearly marked)
 
-Contributions are welcome! Please create a pull request or raise an issue to discuss your ideas. Ensure that your contributions follow the project's coding standards and guidelines.
+### OpenCV/MobileNetSSD (Last-resort fallback)
+- Fully offline — requires model files in project root
+- Confidence fixed at 0.60 (degraded-mode marker)
 
-## License
+---
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Fallback Behavior
 
-## Additional Setup Instructions
+```
+[Roboflow] → fail → [HuggingFace] → fail → [Geospatial] → fail → [OpenCV] → fail → error estimate
+```
 
-1. **Dependencies Installation**:
-   - All requirements are added in the `dependencies.bat` file. To install all dependencies, simply run this `.bat` file in the terminal.
-   - After running the `dependencies.bat` file, add your own IP address in the `detection.py` file. To find the IP address, install the "IP Camera" app from the Play Store. Once the server starts on the IP Camera app, the IP address will be displayed.
+**Circuit breaker:** After N consecutive failures, a provider is bypassed for 60 s before retrying.
 
-2. **Running the Project**:
-   - To run the project, navigate to the project directory in the terminal and run the command:
-     ```bash
-     start.bat
-     ```
-   - Ensure that the IP Camera server is started on your mobile device before running the project.
-   - Point the camera to a crowd to count the number of people.
-3. **Current progress and issues faced**
-   -We tried to deploy this project but due to lack of resources we cant although we improved the UI/UX of the website pretty much but due to time congestions we couldnt 
-we have attached the deployment of our sample frontend of how this project would look like in future 
-`https://vite-woad-two-83.vercel.app/`
-   
+**Retries:** Each provider is retried up to `PROVIDER_MAX_RETRIES` times with exponential back-off before falling back.
 
+---
+
+## API Reference
+
+Full interactive docs at `http://localhost:8000/docs`.
+
+### `POST /api/v1/estimate`
+
+```json
+// Request
+{
+  "latitude": 18.52,
+  "longitude": 73.85,
+  "source": "rtsp://192.168.1.10:8080/video",
+  "label": "Main Entrance"
+}
+
+// Response
+{
+  "count": 12,
+  "confidence": 0.87,
+  "timestamp": "2024-01-15T10:30:00+00:00",
+  "source": "roboflow",
+  "camera_id": "uuid",
+  "latitude": 18.52,
+  "longitude": 73.85,
+  "metadata": {},
+  "error": null
+}
+```
+
+### Other endpoints
+| Endpoint | Description |
+|----------|-------------|
+| `GET /health` | Provider health + aggregate status |
+| `GET /api/v1/orchestrator/health` | Metrics: fallback rate, circuit state |
+| `GET /readyz` | Kubernetes readiness probe |
+| `GET /livez` | Kubernetes liveness probe |
+| `GET /docs` | Swagger UI |
+
+---
+
+## Observability
+
+### Structured Logs
+
+```bash
+LOG_JSON=true  # enables JSON-line output
+```
+
+Example log line:
+```json
+{"timestamp":"2024-01-15T10:30:00Z","level":"INFO","message":"Provider roboflow returned valid estimate","count":12,"correlation_id":"abc-123"}
+```
+
+### Correlation IDs
+
+Pass `X-Correlation-ID` header; it is echoed back and injected into all log lines.
+
+### Metrics
+
+`GET /api/v1/orchestrator/health` returns:
+- `total_requests`, `fallback_count`, `fallback_rate`
+- Per-provider: `success`, `failure`, `timeout`, `circuit_open`
+
+---
+
+## Testing
+
+```bash
+# All tests
+python -m pytest
+
+# Unit tests (no external calls)
+python -m pytest tests/unit/ -v
+
+# Integration tests (API contracts)
+python -m pytest tests/integration/ -v
+```
+
+---
+
+## Docker Deployment
+
+```bash
+# Start all services
+docker compose up --build
+
+# Stop
+docker compose down
+```
+
+---
+
+## Migration from Legacy OpenCV Flow
+
+| Before | After |
+|--------|-------|
+| `detection.py` — monolithic OpenCV | `crowd_engine/` — modular, provider-agnostic |
+| Hard-coded MongoDB URI in source | `MONGO_URI` env var |
+| No fallback | 4-provider fallback chain |
+| No error handling | Circuit breaker + retry + structured errors |
+| No REST API | FastAPI with OpenAPI docs |
+| No tests | 42 tests (unit + integration) |
+| No Docker | `Dockerfile` + `docker-compose.yml` |
+
+```bash
+# Old
+python detection.py
+
+# New
+python -m crowd_engine --cameras cameras.json
+
+# Health check
+python -m crowd_engine --health
+```
+
+The original `detection.py` is preserved unchanged. The OpenCV MobileNetSSD logic lives in `crowd_engine/providers/opencv_provider.py` as the last-resort fallback.
+
+---
+
+## Troubleshooting
+
+**All providers failed:** Run `python -m crowd_engine --health` to see status.
+
+**Roboflow 401:** Check `ROBOFLOW_API_KEY`.
+
+**HuggingFace slow (first run):** Expected — downloading model. Subsequent runs use cache.
+
+**Circuit breaker tripping:** Provider is consistently failing. Check `/api/v1/orchestrator/health` and remove failing provider from `PROVIDER_CHAIN`.
+
+---
+
+## Security
+
+- **Passwords:** Currently stored in plain text — add bcrypt hashing before production.
+- **API keys:** Store in `.env` or a secrets manager. Never commit to source control.
+- **CORS:** Configured for `*` in dev. Restrict `allow_origins` in production.
+- **Rate limiting:** 60 req/min per IP by default. Tune `RATE_LIMIT_PER_MINUTE`.
+- **Security headers:** `X-Content-Type-Options`, `X-Frame-Options`, `Strict-Transport-Security` set on all API responses.

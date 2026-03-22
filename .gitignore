@@ -1,0 +1,48 @@
+# ── Python ───────────────────────────────────────────────────────────────
+.env
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ── Node / JS ─────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Build artifacts ───────────────────────────────────────────────────────
+build/static/
+
+# ── Models (large binary files — download separately) ────────────────────
+*.caffemodel
+*.pt
+*.pth
+*.onnx
+*.h5
+
+# ── Videos (large binaries) ──────────────────────────────────────────────
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# ── OS / editor ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
