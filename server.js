@@ -1,14 +1,15 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
-const { MongoClient } = require('mongodb'); 
+const { MongoClient } = require('mongodb');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 
 const cors = require('cors');
 
-
-const uri = "process.env.mongo_URL";
+const uri = process.env.MONGO_URI || process.env.mongo_URL || 'mongodb://localhost:27017';
 
 const client = new MongoClient(uri);
 let collection;
@@ -24,13 +25,33 @@ async function connectToDatabase() {
         process.exit(1); 
     }
 }
+app.use(cors());
 app.use(express.static('admin'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Security headers
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    next();
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        service: 'crowd-dashboard',
+        version: process.env.npm_package_version || '2.0.0',
+    });
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin', 'admin.html'));
 });
 app.use(express.static('public'));
-app.use(express.json());
 
 
 app.get('/crowd', (req, res) => {
@@ -183,11 +204,7 @@ app.get('/history', async (req, res) => {
     }
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-
-mongoose.connect('process.env.mongo_URL', {
+mongoose.connect(process.env.MONGO_URI || process.env.mongo_URL || 'mongodb://localhost:27017', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {

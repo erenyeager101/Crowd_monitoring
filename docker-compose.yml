@@ -1,0 +1,63 @@
+services:
+  # ── Python Crowd Engine API ──────────────────────────────────────────────
+  crowd-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - LOG_JSON=true
+      - PROVIDER_CHAIN=roboflow,huggingface,geospatial,opencv
+    volumes:
+      # Mount model file separately (large binary)
+      - ./MobileNetSSD_deploy.caffemodel:/app/MobileNetSSD_deploy.caffemodel:ro
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/livez')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Node.js Dashboard Server ─────────────────────────────────────────────
+  crowd-dashboard:
+    image: node:20-slim
+    working_dir: /app
+    command: node server.js
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - PORT=3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── MongoDB ──────────────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=home
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo-data:
