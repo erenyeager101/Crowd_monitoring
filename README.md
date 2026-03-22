@@ -109,16 +109,16 @@ The dashboard (`public/index.html`) is a single-page app with sidebar navigation
 
 ### Pages / Sections
 
-| Section | URL | Data Source |
-|---------|-----|-------------|
-| Overview | `/crowd` | `GET /data` — KPI cards, recent readings table, 3 real-time charts |
-| Live Map | `/crowd#live-map` | `GET /data` — Leaflet map with colour-coded crowd markers |
-| Shops | `/crowd#shops` | `GET /shops` + `GET /data` — Table of registered shops with live crowd status |
-| Trends & Charts | `/crowd#analytics` | `GET /data` — Time-series charts; shop comparison from `/api/historical-data` |
-| Top Locations | `/crowd#top-shops` | `GET /api/top-shops` — Bar chart + ranking table |
-| Heatmap Data | `/crowd#heatmap` | `GET /api/heatmap` — Grid view with density bars |
-| History | `/crowd#history` | `GET /history?shop=&time=` — Per-shop historical chart + table |
-| System Health | `/crowd#health` | `GET /health` (Node.js) + `GET http://localhost:8000/health` (Python) + `/api/v1/orchestrator/health` |
+| Section | Navigation | Data Source |
+|---------|------------|-------------|
+| Overview | Default view at `/crowd` | `GET /data` — KPI cards, recent readings table, 3 real-time charts |
+| Live Map | Click "Live Map" in sidebar | `GET /data` — Leaflet map with colour-coded crowd markers |
+| Shops | Click "Shops" in sidebar | `GET /shops` + `GET /data` — Table of registered shops with live crowd status |
+| Trends & Charts | Click "Trends & Charts" in sidebar | `GET /data` — Time-series charts; shop comparison from `/api/historical-data` |
+| Top Locations | Click "Top Locations" in sidebar | `GET /api/top-shops` — Bar chart + ranking table |
+| Heatmap Data | Click "Heatmap Data" in sidebar | `GET /api/heatmap` — Grid view with density bars |
+| History | Click "History" in sidebar | `GET /history?shop=&time=` — Per-shop historical chart + table |
+| System Health | Click "System Health" in sidebar | `GET /health` (Node.js) + `GET http://localhost:8000/health` (Python) + `/api/v1/orchestrator/health` |
 
 ### Features
 

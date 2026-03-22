@@ -11,12 +11,9 @@ const REFRESH_INTERVAL = 5000; // ms
 
 const SHOP_NAMES = {
   '18.5204,73.8567': 'Zudio',
-  '18.525,73.8567':  'Phoenix Mall',
   '18.5250,73.8567': 'Phoenix Mall',
   '18.5369,73.8567': 'Kaka Halwai',
-  '18.565,73.8567':  'Shaniwar Peth',
   '18.5650,73.8567': 'Shaniwar Peth',
-  '18.585,73.8567':  'Starbucks',
   '18.5850,73.8567': 'Starbucks',
 };
 
@@ -70,7 +67,7 @@ function pushToChart(chart, label, values) {
   values.forEach((v, i) => chart.data.datasets[i].data.push(v));
   if (chart.data.labels.length > 20) {
     chart.data.labels.shift();
-    chart.data.datasets.forEach(d => d.shift && d.data.shift());
+    chart.data.datasets.forEach(d => d.data.shift());
   }
   chart.update('none');
 }
